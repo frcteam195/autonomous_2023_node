@@ -6,7 +6,22 @@ from threading import Thread
 
 from frc_robot_utilities_py_node.frc_robot_utilities_py import *
 from frc_robot_utilities_py_node.RobotStatusHelperPy import RobotStatusHelperPy, Alliance, RobotMode
-from ck_ros_msgs_node.msg import Autonomous_Configuration
+from ck_ros_msgs_node.msg import Autonomous_Configuration, Autonomous_Selection
+
+possible_autos = []
+def filter_autos(new_selections):
+    possible_autos.clear()
+
+    global selections
+    selections = new_selections
+    if selections["starting_positions"] == "Wall":
+        selections["autonomous_options"] = "Score Two + Climb"
+    elif selections["starting_positions"] == "Middle":
+        selections["autonomous_options"] = "Middle"
+    else:
+        selections["autonomous_options"] = "Score Two + Climb"
+
+    
 
 def ros_func():
     global hmi_updates
@@ -14,7 +29,7 @@ def ros_func():
 
     auto_configuration_publisher = rospy.Publisher(name="AutonomousConfiguration", data_class=Autonomous_Configuration, queue_size=50, tcp_nodelay=True)
     autonomous_configuration_options = Autonomous_Configuration()
-    autonomous_configuration_options.autonomous_options = ["Climb", "Score Two + Climb"]
+    autonomous_configuration_options.autonomous_options =  ["Climb", "Score Two + Climb"]
     autonomous_configuration_options.game_pieces = ["Cone", "Cube"]
     autonomous_configuration_options.starting_positions = ["Wall", "Middle", "Loading Side"]
 
@@ -44,6 +59,8 @@ def ros_func():
 def ros_main(node_name):
     rospy.init_node(node_name)
     register_for_robot_updates()
+    
+    rospy.Subscriber("AutonomousSelection", Autonomous_Selection, filter_autos)
 
     t1 = Thread(target=ros_func)
     t1.start()
