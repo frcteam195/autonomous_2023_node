@@ -11,22 +11,25 @@ from ck_ros_msgs_node.msg import Autonomous_Configuration, Autonomous_Selection
 possible_autos = []
 def filter_autos(new_selections):
     possible_autos.clear()
-
+# /mnt/working/led_control_2023_node
     global selections
     selections = new_selections
     if selections["starting_positions"] == "Wall":
         selections["autonomous_options"] = "Score Two + Climb"
     elif selections["starting_positions"] == "Middle":
-        selections["autonomous_options"] = "Middle"
+        selections["autonomous_options"] = "Climb"
     else:
-        selections["autonomous_options"] = "Score Two + Climb"
+        selections["autonomous_options"] = "Score Three + Climb"
+    autonomous_configuration_options.autonomous_options =  selections["autonomous_options"]
+    auto_configuration_publisher.publish(autonomous_configuration_options)
 
     
 
 def ros_func():
     global hmi_updates
     global robot_status
-
+    global auto_configuration_publisher
+    global autonomous_configuration_options
     auto_configuration_publisher = rospy.Publisher(name="AutonomousConfiguration", data_class=Autonomous_Configuration, queue_size=50, tcp_nodelay=True)
     autonomous_configuration_options = Autonomous_Configuration()
     autonomous_configuration_options.autonomous_options =  ["Climb", "Score Two + Climb"]
