@@ -8,53 +8,37 @@ from frc_robot_utilities_py_node.frc_robot_utilities_py import *
 from frc_robot_utilities_py_node.RobotStatusHelperPy import RobotStatusHelperPy, Alliance, RobotMode
 from ck_ros_msgs_node.msg import Autonomous_Configuration, Autonomous_Selection
 
-possible_autos = []
+
+
 def filter_autos(new_selections):
-    possible_autos.clear()
-# /mnt/working/led_control_2023_node
-    global selections
-    selections = new_selections
-    if selections["starting_positions"] == "Wall":
-        selections["autonomous_options"] = "Score Two + Climb"
-    elif selections["starting_positions"] == "Middle":
-        selections["autonomous_options"] = "Climb"
-    else:
-        selections["autonomous_options"] = "Score Three + Climb"
-    autonomous_configuration_options.autonomous_options =  selections["autonomous_options"]
-    auto_configuration_publisher.publish(autonomous_configuration_options)
+    global autonomous_configuration_options
+
+    if new_selections.starting_position == "Wall":
+        autonomous_configuration_options.autonomous_options =  ["Score Two + Climb"]
+    elif new_selections.starting_position == "Middle":
+        autonomous_configuration_options.autonomous_options =  ["Climb", "Score Two + Climb"]
+    elif new_selections.starting_position == "Loading Side":
+        autonomous_configuration_options.autonomous_options =  ["Score Three +Climb"]
+  
 
     
 
 def ros_func():
+    global autonomous_configuration_options
     global hmi_updates
     global robot_status
-    global auto_configuration_publisher
-    global autonomous_configuration_options
+
     auto_configuration_publisher = rospy.Publisher(name="AutonomousConfiguration", data_class=Autonomous_Configuration, queue_size=50, tcp_nodelay=True)
     autonomous_configuration_options = Autonomous_Configuration()
-    autonomous_configuration_options.autonomous_options =  ["Climb", "Score Two + Climb"]
+   # autonomous_configuration_options.autonomous_options =  ["Climb", "Score Two + Climb"]
     autonomous_configuration_options.game_pieces = ["Cone", "Cube"]
     autonomous_configuration_options.starting_positions = ["Wall", "Middle", "Loading Side"]
 
-    config_publish_counter : int = 1
 
     rate = rospy.Rate(50)
     while not rospy.is_shutdown():
-        #Publish auto configuration once every two seconds
-        if (config_publish_counter % 100 == 0):
-            auto_configuration_publisher.publish(autonomous_configuration_options)
-            config_publish_counter = 1
-        else:
-            config_publish_counter += 1
 
-        if robot_status.get_mode() == RobotMode.AUTONOMOUS:
-            pass
-        elif robot_status.get_mode() == RobotMode.TELEOP:
-            pass
-        elif robot_status.get_mode() == RobotMode.DISABLED:
-            pass
-        elif robot_status.get_mode() == RobotMode.TEST:
-            pass
+        auto_configuration_publisher.publish(autonomous_configuration_options)
 
         rate.sleep()
 
