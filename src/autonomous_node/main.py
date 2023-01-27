@@ -12,7 +12,7 @@ from ck_ros_msgs_node.msg import Autonomous_Configuration, Autonomous_Selection
 
 def filter_autos(new_selections):
     global autonomous_configuration_options
-
+    
     # Determine the available autonomous.
     if new_selections.starting_position == "Wall":
         autonomous_configuration_options.autonomous_options =  ["Score Two + Climb"]
@@ -21,12 +21,17 @@ def filter_autos(new_selections):
     elif new_selections.starting_position == "Loading Side":
         autonomous_configuration_options.autonomous_options =  ["Score Three + Climb"]
 
+
     # Determine the file name.
 
     starting_position = f"{new_selections.starting_position.replace(' ', '').lower()}"
 
     if new_selections.autonomous == "Climb":
         autonomous_configuration_options.preview_image_name = f"{starting_position}_climb.png"
+    elif new_selections.autonomous == "Score Two + Climb":
+        autonomous_configuration_options.preview_image_name = f"{starting_position}_score_two.png"
+    elif new_selections.autonomous == "Score Three + Climb":
+        autonomous_configuration_options.preview_image_name = f"{starting_position}_score_three.png"
   
 
     
