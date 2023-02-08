@@ -56,16 +56,17 @@ def ros_func():
    # autonomous_configuration_options.autonomous_options =  ["Climb", "Score Two + Climb"]
     autonomous_configuration_options.game_pieces = ["Cone", "Cube"]
     autonomous_configuration_options.starting_positions = ["Wall", "Middle", "Loading Side"]
-    auto_runner = rospy.ServiceProxy('/get_start_pose', GetStartPose)
 
     rate = rospy.Rate(50)
     while not rospy.is_shutdown():
-        # start_pose: GetStartPoseResponse = auto_runner('correct_start')
+        if run_once:
+            rospy.sleep(5)
+            auto_runner = rospy.ServiceProxy('/get_start_pose', GetStartPose)
+            start_pose: GetStartPoseResponse = auto_runner('correct_start')
 
-        # if not same_pose(current_start_pose, start_pose):
-        #     print(start_pose)
-        #     current_start_pose = start_pose
-        #     reset_robot_pose(start_pose.x_inches, start_pose.y_inches, start_pose.heading_degrees)
+            print(start_pose)
+            reset_robot_pose(start_pose.x_inches, start_pose.y_inches, start_pose.heading_degrees)
+            run_once = False
 
         auto_configuration_publisher.publish(autonomous_configuration_options)
 
