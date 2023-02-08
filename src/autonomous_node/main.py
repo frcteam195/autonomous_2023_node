@@ -7,8 +7,15 @@ from threading import Thread
 from frc_robot_utilities_py_node.frc_robot_utilities_py import *
 from frc_robot_utilities_py_node.RobotStatusHelperPy import RobotStatusHelperPy, Alliance, RobotMode
 from ck_ros_msgs_node.msg import Autonomous_Configuration, Autonomous_Selection
+from swerve_trajectory_node.srv import StartTrajectory, GetStartPose, GetStartPoseResponse
 
 
+run_once = True
+current_start_pose = GetStartPoseResponse(x_inches=0, y_inches=0, heading_degrees=0)
+
+
+def same_pose(pose1: GetStartPoseResponse, pose2: GetStartPoseResponse) -> bool:
+    return pose1.x_inches == pose2.x_inches and pose1.y_inches == pose2.y_inches and pose1.heading_degrees == pose2.heading_degrees
 
 def filter_autos(new_selections):
     global autonomous_configuration_options
@@ -40,16 +47,25 @@ def ros_func():
     global autonomous_configuration_options
     global hmi_updates
     global robot_status
+    global auto_runner
+    global run_once
+    global current_start_pose
 
     auto_configuration_publisher = rospy.Publisher(name="AutonomousConfiguration", data_class=Autonomous_Configuration, queue_size=50, tcp_nodelay=True)
     autonomous_configuration_options = Autonomous_Configuration()
    # autonomous_configuration_options.autonomous_options =  ["Climb", "Score Two + Climb"]
     autonomous_configuration_options.game_pieces = ["Cone", "Cube"]
     autonomous_configuration_options.starting_positions = ["Wall", "Middle", "Loading Side"]
-
+    auto_runner = rospy.ServiceProxy('/get_start_pose', GetStartPose)
 
     rate = rospy.Rate(50)
     while not rospy.is_shutdown():
+        # start_pose: GetStartPoseResponse = auto_runner('correct_start')
+
+        # if not same_pose(current_start_pose, start_pose):
+        #     print(start_pose)
+        #     current_start_pose = start_pose
+        #     reset_robot_pose(start_pose.x_inches, start_pose.y_inches, start_pose.heading_degrees)
 
         auto_configuration_publisher.publish(autonomous_configuration_options)
 
