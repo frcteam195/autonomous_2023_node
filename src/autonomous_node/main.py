@@ -7,11 +7,14 @@ from threading import Thread
 from frc_robot_utilities_py_node.frc_robot_utilities_py import *
 from frc_robot_utilities_py_node.RobotStatusHelperPy import RobotStatusHelperPy, Alliance, RobotMode
 from ck_ros_msgs_node.msg import Autonomous_Configuration, Autonomous_Selection
-from swerve_trajectory_node.srv import StartTrajectory, GetStartPose, GetStartPoseResponse
+from swerve_trajectory_node.srv import StartTrajectory, StartTrajectoryResponse, GetStartPose, GetStartPoseResponse
 
 
 run_once = True
+run_auto = True
 current_start_pose = GetStartPoseResponse(x_inches=0, y_inches=0, heading_degrees=0)
+
+selected_auto = 'correct_start'
 
 
 def same_pose(pose1: GetStartPoseResponse, pose2: GetStartPoseResponse) -> bool:
@@ -47,9 +50,11 @@ def ros_func():
     global autonomous_configuration_options
     global hmi_updates
     global robot_status
-    global auto_runner
+    global get_pose
     global run_once
+    global run_auto
     global current_start_pose
+    global selected_auto
 
     auto_configuration_publisher = rospy.Publisher(name="AutonomousConfiguration", data_class=Autonomous_Configuration, queue_size=50, tcp_nodelay=True)
     autonomous_configuration_options = Autonomous_Configuration()
@@ -61,12 +66,19 @@ def ros_func():
     while not rospy.is_shutdown():
         if run_once:
             rospy.sleep(5)
-            auto_runner = rospy.ServiceProxy('/get_start_pose', GetStartPose)
-            start_pose: GetStartPoseResponse = auto_runner('correct_start')
+            get_pose = rospy.ServiceProxy('/get_start_pose', GetStartPose)
+            start_pose: GetStartPoseResponse = get_pose(selected_auto)
 
             print(start_pose)
             reset_robot_pose(start_pose.x_inches, start_pose.y_inches, start_pose.heading_degrees)
             run_once = False
+
+        if run_auto and robot_status.get_mode() == RobotMode.AUTONOMOUS:
+            auto_runner = rospy.ServiceProxy('/start_trajectory', StartTrajectory)
+            auto_runner(selected_auto)
+            run_auto = False 
+        elif robot_status.get_mode() == RobotMode.DISABLED:
+            run_auto = True
 
         auto_configuration_publisher.publish(autonomous_configuration_options)
 
