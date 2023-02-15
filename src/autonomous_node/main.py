@@ -5,6 +5,7 @@ Class definition of the autonomous node.
 from threading import Thread
 import rospy
 
+from actions_node.ActionRunner import ActionRunner
 from ck_ros_msgs_node.msg import Autonomous_Configuration, Autonomous_Selection
 
 from frc_robot_utilities_py_node.frc_robot_utilities_py import *
@@ -37,6 +38,9 @@ class AutonomousNode():
             name="AutonomousConfiguration", data_class=Autonomous_Configuration, queue_size=50, tcp_nodelay=True)
 
         self.autonomous_configuration_options = Autonomous_Configuration()
+        self.selected_autonomous = ""
+
+        self.runner = ActionRunner()
 
         loop_thread = Thread(target=self.loop)
         loop_thread.start()
@@ -58,6 +62,10 @@ class AutonomousNode():
 
             self.autonomous_configuration_publisher.publish(self.autonomous_configuration_options)
 
+            # TODO: Create the autonomous action based on the selected autonomous.
+
+            self.runner.loop(robot_status.get_mode())
+
             rate.sleep()
 
     def filter_autonomous_options(self, selections) -> None:
@@ -69,4 +77,5 @@ class AutonomousNode():
         starting_position = selections.starting_position.replace(' ', '').lower()
         autonomous = selections.autonomous.replace(' ', '').lower()
 
+        self.selected_autonomous = f"{starting_position}_{autonomous}"
         self.autonomous_configuration_options.preview_image_name = f"{starting_position}_{autonomous}.png"
