@@ -12,21 +12,16 @@ class CubeMiddleBalance(AutoBase):
     Scores a game piece in the cooperatition grid, drives over the charge station, and then balances.
     """
     def __init__(self) -> None:
-        super().__init__()
-
-        self.display_name = "Balance"
-        self.game_piece = GamePiece.Cube
-        self.start_position = StartPosition.Middle
-        self.trajectory_count = 2
+        super().__init__(display_name="Balance",
+                         game_piece=GamePiece.Cube,
+                         start_position=StartPosition.Middle,
+                         expected_trajectory_count=2)
 
     def get_action(self) -> SeriesAction:
-        if self.trajectory_count != self.get_trajectory_count():
-            pass
-
         return SeriesAction([
             ScoreCube(False),
             ParallelAction([
-                DriveTrajectoryAction(self.get_unique_name(), 0, True),
+                self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
                     GroundAction(True),
                     IntakeAction(False)
@@ -34,7 +29,7 @@ class CubeMiddleBalance(AutoBase):
             ]),
             IntakeAction(False, 0.5),
             ParallelAction([
-                DriveTrajectoryAction(self.get_unique_name(), 1, True),
+                self.trajectory_iterator.get_next_trajectory_action(),
                 InRobotAction()
             ])
         ])
