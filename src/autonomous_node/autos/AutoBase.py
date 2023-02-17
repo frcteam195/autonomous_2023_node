@@ -46,4 +46,4 @@ class AutoBase(ABC):
         """
         Returns the unique autonomous name based on the filters and display name.
         """
-        return f"{self.game_piece.name}{self.start_position.name}{self.display_name}"
+        return f"{self.game_piece.name}_{self.start_position.name}_{self.display_name}"

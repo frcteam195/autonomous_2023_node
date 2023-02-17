@@ -35,7 +35,7 @@ class AutonomousNode():
 
     def __init__(self) -> None:
 
-        rospy.Subscriber("AutonomousSelection", Autonomous_Selection, self.filter_autonomous_options)
+        rospy.Subscriber("AutonomousSelection", Autonomous_Selection, self.filter_autonomous_options, tcp_nodelay=True)
 
         self.autonomous_configuration_publisher = rospy.Publisher(
             name="AutonomousConfiguration", data_class=Autonomous_Configuration, queue_size=50, tcp_nodelay=True)
