@@ -14,6 +14,8 @@ from autonomous_node.autos import AUTONOMOUS_SELECTION_MAP, AutonomousNames
 
 from autonomous_node.autos import SimpleAuto
 
+from threading import RLock
+
 #TODO: Update to use the enum from AutonomousNames in __init__.py for the final auto string so that there is no chance of typo
 AUTONOMOUS_MAP = {
     "Cube": {
@@ -45,6 +47,8 @@ class AutonomousNode():
 
         self.runner = ActionRunner()
 
+        self.__lock = RLock()
+
         self.__prev_robot_mode = RobotMode.DISABLED
         self.__selected_auto = AUTONOMOUS_SELECTION_MAP[AutonomousNames.SimpleAuto]   #auto mapping is defined in autos.__init__.py
 
@@ -69,7 +73,11 @@ class AutonomousNode():
 
             self.autonomous_configuration_publisher.publish(self.autonomous_configuration_options)
 
-            # TODO: Create the autonomous action based on the selected autonomous.
+            with self.__lock:
+                if AutonomousNames(self.selected_autonomous) in AUTONOMOUS_SELECTION_MAP:
+                    self.__selected_auto = AUTONOMOUS_SELECTION_MAP[AutonomousNames(self.selected_autonomous)]
+                else:
+                    self.__selected_auto = None
 
             if robot_mode == RobotMode.AUTONOMOUS:
                 # Start the action on the transition from Disabled to Auto.
@@ -95,5 +103,7 @@ class AutonomousNode():
         starting_position = selections.starting_position.replace(' ', '').lower()
         autonomous = selections.autonomous.replace(' ', '').lower()
 
-        self.selected_autonomous = f"{starting_position}_{autonomous}"
+        with self.__lock:
+            self.selected_autonomous = f"{starting_position}_{autonomous}"
+
         self.autonomous_configuration_options.preview_image_name = f"{starting_position}_{autonomous}.png"
