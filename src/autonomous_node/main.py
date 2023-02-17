@@ -12,6 +12,8 @@ from frc_robot_utilities_py_node.frc_robot_utilities_py import *
 from frc_robot_utilities_py_node.RobotStatusHelperPy import RobotStatusHelperPy, Alliance, RobotMode
 from autonomous_node.autos import AUTONOMOUS_SELECTION_MAP, AutonomousNames
 
+from autonomous_node.autos import SimpleAuto
+
 #TODO: Update to use the enum from AutonomousNames in __init__.py for the final auto string so that there is no chance of typo
 AUTONOMOUS_MAP = {
     "Cube": {
@@ -44,7 +46,7 @@ class AutonomousNode():
         self.runner = ActionRunner()
 
         self.__prev_robot_mode = RobotMode.DISABLED
-        self.__selected_auto = AUTONOMOUS_SELECTION_MAP[AutonomousNames.SampleAuto]   #auto mapping is defined in autos.__init__.py
+        self.__selected_auto = AUTONOMOUS_SELECTION_MAP[AutonomousNames.SimpleAuto]   #auto mapping is defined in autos.__init__.py
 
 
         register_for_robot_updates()
@@ -73,7 +75,9 @@ class AutonomousNode():
                 # Start the action on the transition from Disabled to Auto.
                 if self.__prev_robot_mode == RobotMode.DISABLED:
                     if self.__selected_auto is not None:
-                        self.runner.start_action(self.__selected_auto.getAction())
+                        # self.runner.start_action(self.__selected_auto.getAction())
+                        auto = SimpleAuto()
+                        self.runner.start_action(auto.get_action())
 
                 #Maybe report status of the autonomous here?
 

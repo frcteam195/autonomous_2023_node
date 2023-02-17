@@ -11,16 +11,18 @@ class GamePiece(Enum):
     """
     Starting game pieces.
     """
-    Cone = 0
-    Cube = 1
+    Null = 0
+    Cone = 1
+    Cube = 2
 
 class StartPosition(Enum):
     """
     General start positions on the field.
     """
-    Wall = 0
-    Middle = 1
-    Loading = 2
+    Null = 0
+    Wall = 1
+    Middle = 2
+    Loading = 3
 
 class AutoBase(ABC):
     """

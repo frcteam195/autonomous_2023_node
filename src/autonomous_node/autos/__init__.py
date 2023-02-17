@@ -1,10 +1,12 @@
 from autonomous_node.autos.SampleAuto import SampleAuto
+from autonomous_node.autos.SimpleAuto import SimpleAuto
 from autonomous_node.autos.AutoBase import AutoBase
 from enum import Enum
 
 class AutonomousNames(str, Enum):
     SampleAuto = "SampleAuto",
-    Auto1 = "Auto1"
+    Auto1 = "Auto1",
+    SimpleAuto = "SimpleAuto"
 
 
 
@@ -16,5 +18,5 @@ class AutonomousNames(str, Enum):
 
 
 AUTONOMOUS_SELECTION_MAP = {
-    AutonomousNames.SampleAuto: SampleAuto()
+    AutonomousNames.SimpleAuto: SimpleAuto()
 }
