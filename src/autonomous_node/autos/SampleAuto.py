@@ -7,7 +7,7 @@ from actions_node.game_specific_actions.IntakeAction import IntakeAction
 from actions_node.game_specific_actions.AutomatedActions import *
 
 class SampleAuto(AutoBase):
-    def getAction(self) -> SeriesAction:
+    def get_action(self) -> SeriesAction:
         return SeriesAction([
             ParallelAction([
                 DriveTrajectoryAction("correct_start", True),

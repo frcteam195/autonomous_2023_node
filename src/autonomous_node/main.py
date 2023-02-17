@@ -70,7 +70,7 @@ class AutonomousNode():
             # TODO: Create the autonomous action based on the selected autonomous.
 
             if robot_mode == RobotMode.AUTONOMOUS:
-                #Start the action on the transition from Disabled to Auto
+                # Start the action on the transition from Disabled to Auto.
                 if self.__prev_robot_mode == RobotMode.DISABLED:
                     if self.__selected_auto is not None:
                         self.runner.start_action(self.__selected_auto.getAction())
