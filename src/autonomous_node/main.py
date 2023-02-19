@@ -11,7 +11,7 @@ from ck_ros_msgs_node.msg import Autonomous_Configuration, Autonomous_Selection
 from frc_robot_utilities_py_node.frc_robot_utilities_py import *
 from frc_robot_utilities_py_node.RobotStatusHelperPy import RobotStatusHelperPy, Alliance, RobotMode
 from autonomous_node.autos import AUTONOMOUS_SELECTION_MAP, AutonomousNames
-
+from autonomous_node.autos.AutoBase import AutoBase
 from autonomous_node.autos import CorrectStart
 
 from threading import RLock
@@ -35,7 +35,7 @@ class AutonomousNode():
         self.__lock = RLock()
 
         self.__prev_robot_mode = RobotMode.DISABLED
-        self.__selected_auto = None
+        self.__selected_auto : AutoBase = None
 
 
         register_for_robot_updates()
@@ -70,7 +70,10 @@ class AutonomousNode():
                 # Start the action on the transition from Disabled to Auto.
                 if self.__prev_robot_mode == RobotMode.DISABLED:
                     if self.__selected_auto is not None:
-                        self.runner.start_action(self.__selected_auto.getAction())
+                        self.runner.start_action(self.__selected_auto.get_action())
+            elif robot_mode == RobotMode.DISABLED:
+                if self.__selected_auto is not None:
+                    self.__selected_auto.reset()
 
             self.__prev_robot_mode = robot_mode
             self.runner.loop(robot_mode)
