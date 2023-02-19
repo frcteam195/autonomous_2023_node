@@ -16,19 +16,6 @@ from autonomous_node.autos import CorrectStart
 
 from threading import RLock
 
-#TODO: Update to use the enum from AutonomousNames in __init__.py for the final auto string so that there is no chance of typo
-AUTONOMOUS_MAP = {
-    "Cube": {
-        "Wall": ["Score Cube"],
-        "Middle": ["Score + Balance", "Balance"],
-        "Loading": ["Score Cube"]
-    },
-    "Cone": {
-        "Wall": ["Score Cone"],
-        "Middle": ["Score + Balance", "Balance"],
-        "Loading": ["Score Cone"]
-    }
-}
 
 class AutonomousNode():
     """
@@ -37,11 +24,9 @@ class AutonomousNode():
 
     def __init__(self) -> None:
 
-        rospy.Subscriber("AutonomousSelection", Autonomous_Selection, self.filter_autonomous_options, tcp_nodelay=True)
-
-        self.autonomous_configuration_publisher = rospy.Publisher(
-            name="AutonomousConfiguration", data_class=Autonomous_Configuration, queue_size=50, tcp_nodelay=True)
-
+        rospy.Subscriber("AutonomousSelection", Autonomous_Selection, self.get_selected_auto, tcp_nodelay=True)
+        
+        self.autonomous_configuration_publisher = rospy.Publisher(name="AutonomousConfiguration", data_class=Autonomous_Configuration, queue_size=50, tcp_nodelay=True)
         self.autonomous_configuration_options = Autonomous_Configuration()
         self.selected_autonomous = ""
 
@@ -50,7 +35,7 @@ class AutonomousNode():
         self.__lock = RLock()
 
         self.__prev_robot_mode = RobotMode.DISABLED
-        self.__selected_auto = AUTONOMOUS_SELECTION_MAP[AutonomousNames.ToddCircle]   #auto mapping is defined in autos.__init__.py
+        self.__selected_auto = None
 
 
         register_for_robot_updates()
@@ -63,47 +48,35 @@ class AutonomousNode():
         """
         Periodic function for the autonomous node.
         """
-        self.autonomous_configuration_options.game_pieces = AUTONOMOUS_MAP.keys()
-        self.autonomous_configuration_options.starting_positions = AUTONOMOUS_MAP["Cube"].keys()
-
         rate = rospy.Rate(50)
+
+        self.autonomous_configuration_options.autonomous_options = [auto_name.value for auto_name in AutonomousNames]
 
         while not rospy.is_shutdown():
             robot_mode : RobotMode = robot_status.get_mode()
-
             self.autonomous_configuration_publisher.publish(self.autonomous_configuration_options)
 
-            # with self.__lock:
-            #     if AutonomousNames(self.selected_autonomous) in AUTONOMOUS_SELECTION_MAP:
-            #         self.__selected_auto = AUTONOMOUS_SELECTION_MAP[AutonomousNames(self.selected_autonomous)]
-            #     else:
-            #         self.__selected_auto = None
+            try:
+                with self.__lock:
+                    if AutonomousNames(self.selected_autonomous) in AUTONOMOUS_SELECTION_MAP:
+                        self.__selected_auto = AUTONOMOUS_SELECTION_MAP[AutonomousNames(self.selected_autonomous)]
+                    else:
+                        self.__selected_auto = None
+            except:
+                rospy.logerr_throttle(period=10,msg="Invalid auto string received!")
+                self.__selected_auto = None
 
             if robot_mode == RobotMode.AUTONOMOUS:
                 # Start the action on the transition from Disabled to Auto.
                 if self.__prev_robot_mode == RobotMode.DISABLED:
                     if self.__selected_auto is not None:
-                        # self.runner.start_action(self.__selected_auto.getAction())
-                        auto = CorrectStart()
-                        self.runner.start_action(auto.get_action())
-
-                #Maybe report status of the autonomous here?
+                        self.runner.start_action(self.__selected_auto.getAction())
 
             self.__prev_robot_mode = robot_mode
             self.runner.loop(robot_mode)
 
             rate.sleep()
 
-    def filter_autonomous_options(self, selections) -> None:
-        """
-        Filters the available autonomous options based on the currently selected starting position and game piece.
-        """
-        self.autonomous_configuration_options = AUTONOMOUS_MAP[selections.game_piece][selections.starting_position]
-
-        starting_position = selections.starting_position.replace(' ', '').lower()
-        autonomous = selections.autonomous.replace(' ', '').lower()
-
+    def get_selected_auto(self, selections : Autonomous_Selection) -> None:
         with self.__lock:
-            self.selected_autonomous = f"{starting_position}_{autonomous}"
-
-        self.autonomous_configuration_options.preview_image_name = f"{starting_position}_{autonomous}.png"
+            self.selected_autonomous = selections.autonomous

@@ -7,7 +7,7 @@ from actions_node.default_actions.DriveTrajectoryAction import DriveTrajectoryAc
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
 from actions_node.game_specific_actions.AutomatedActions import *
 
-class CubeMiddleBalance(AutoBase):
+class ConeHigh1ConeBalance(AutoBase):
     """
     Scores a game piece in the cooperatition grid, drives over the charge station, and then balances.
     """
