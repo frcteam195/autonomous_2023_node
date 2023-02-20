@@ -6,6 +6,8 @@ from actions_node.default_actions.ParallelAction import ParallelAction
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
 from actions_node.game_specific_actions.AutomatedActions import *
 
+from ck_ros_msgs_node.msg import Arm_Goal
+
 class CubeMiddle1CubeBalance(AutoBase):
     """
     Score two game pieces on the loading side.
@@ -18,7 +20,7 @@ class CubeMiddle1CubeBalance(AutoBase):
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
-            ScoreCubeHigh(),
+            ScoreCubeHigh(Arm_Goal.SIDE_BACK),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 IntakeConeGround(Arm_Goal.SIDE_FRONT)
@@ -28,5 +30,5 @@ class CubeMiddle1CubeBalance(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.HOME)
             ]),
-            ScoreConeHigh(Arm_Goal.SIDE_AUTO)
+            ScoreConeHigh(Arm_Goal.SIDE_BACK)
         ])
