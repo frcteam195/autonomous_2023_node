@@ -3,6 +3,7 @@ from autonomous_node.autos.SimpleAuto import SimpleAuto
 from autonomous_node.autos.ToddCircle import ToddCircle
 from autonomous_node.autos.CorrectStart import CorrectStart
 from autonomous_node.autos.CubeMiddle1CubeBalance import CubeMiddle1CubeBalance
+from autonomous_node.autos.CubeLoadingTwoPiece import CubeLoadingTwoPiece
 from enum import Enum
 
 class AutonomousNames(str, Enum):
@@ -27,5 +28,6 @@ AUTONOMOUS_SELECTION_MAP = {
     AutonomousNames.CubeMiddle1CubeBalance: SimpleAuto(),    #Temporarily stop error. Make sure to put proper auto back
     AutonomousNames.ConeHigh1ConeBalance: SimpleAuto(),    #Temporarily stop error. Make sure to put proper auto back
     AutonomousNames.ToddCircle : ToddCircle(),
-    AutonomousNames.CorrectStart : CorrectStart()
+    AutonomousNames.CorrectStart : CorrectStart(),
+    AutonomousNames.CubeLoadingTwoPiece : CubeLoadingTwoPiece()
 }

@@ -8,7 +8,7 @@ from actions_node.game_specific_actions.AutomatedActions import *
 
 from ck_ros_msgs_node.msg import Arm_Goal
 
-class CubeMiddle1CubeBalance(AutoBase):
+class CubeLoadingTwoPiece(AutoBase):
     """
     Score two game pieces on the loading side.
     """
