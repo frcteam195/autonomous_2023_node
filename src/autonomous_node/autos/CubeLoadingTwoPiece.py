@@ -18,18 +18,15 @@ class CubeMiddle1CubeBalance(AutoBase):
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
-            ScoreCube(True),
+            ScoreCubeHigh(),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    GroundAction(False),
-                    IntakeAction(False)
-                ])
+                IntakeConeGround(Arm_Goal.SIDE_FRONT)
             ]),
-            IntakeAction(False, 0.5),
+            IntakeAction(True, 0.5),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                InRobotAction()
+                MoveArmAction(Arm_Goal.HOME)
             ]),
-            ScoreCube(True)
+            ScoreConeHigh(Arm_Goal.SIDE_AUTO)
         ])
