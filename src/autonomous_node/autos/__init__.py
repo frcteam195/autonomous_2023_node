@@ -14,6 +14,7 @@ class AutonomousNames(str, Enum):
     SimpleAuto = "Null_Null_auto",
     ToddCircle = "Null_Null_ToddCircle",
     CorrectStart = "Null_Null_CorrectStart"
+    CubeLoadingTwoPiece = "Cube_Loading_TwoPiece"
 
     def __str__(self) -> str:
         return str.__str__(self)
