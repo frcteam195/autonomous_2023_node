@@ -23,12 +23,18 @@ class CubeLoadingTwoPiece(AutoBase):
             ScoreCubeHigh(Arm_Goal.SIDE_BACK),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                IntakeConeGround(Arm_Goal.SIDE_FRONT)
+                SeriesAction([
+                    WaitAction(1),
+                    IntakeAction(True)
+                ])
             ]),
-            IntakeAction(True, 0.5),
+            IntakeConeGround(Arm_Goal.SIDE_FRONT),
             ParallelAction([
-                self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.HOME)
+                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
+                SeriesAction([
+                    WaitAction(0.3),
+                    self.trajectory_iterator.get_next_trajectory_action()
+                ])
             ]),
             ScoreConeHigh(Arm_Goal.SIDE_BACK)
         ])
