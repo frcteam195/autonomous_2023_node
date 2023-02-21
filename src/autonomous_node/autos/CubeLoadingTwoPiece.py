@@ -21,20 +21,14 @@ class CubeLoadingTwoPiece(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ScoreCubeHigh(Arm_Goal.SIDE_BACK),
-            ParallelAction([
-                self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    WaitAction(1),
-                    IntakeAction(True)
-                ])
-            ]),
-            IntakeConeGround(Arm_Goal.SIDE_FRONT),
+            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
+            MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_FRONT),
+            IntakeAction(True),
+            self.trajectory_iterator.get_next_trajectory_action(),
+            IntakeAction(True, 0.0),
             ParallelAction([
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
-                SeriesAction([
-                    WaitAction(0.3),
-                    self.trajectory_iterator.get_next_trajectory_action()
-                ])
+                self.trajectory_iterator.get_next_trajectory_action()
             ]),
-            ScoreConeHigh(Arm_Goal.SIDE_BACK)
+            ScoreConeHigh(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180)
         ])
