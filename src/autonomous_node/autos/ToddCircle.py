@@ -13,8 +13,8 @@ class ToddCircle(AutoBase):
     """
     def __init__(self) -> None:
         super().__init__(display_name="ToddCircle",
-                         game_piece=GamePiece.Null,
-                         start_position=StartPosition.Null,
+                         game_piece=GamePiece.Test,
+                         start_position=StartPosition.Test,
                          expected_trajectory_count=1)
 
     def get_action(self) -> SeriesAction:

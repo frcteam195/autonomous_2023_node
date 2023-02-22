@@ -25,8 +25,9 @@ class AutonomousNode():
     def __init__(self) -> None:
 
         rospy.Subscriber("AutonomousSelection", Autonomous_Selection, self.get_selected_auto, tcp_nodelay=True)
-        
-        self.autonomous_configuration_publisher = rospy.Publisher(name="AutonomousConfiguration", data_class=Autonomous_Configuration, queue_size=50, tcp_nodelay=True)
+
+        self.autonomous_configuration_publisher = rospy.Publisher(
+            name="AutonomousConfiguration", data_class=Autonomous_Configuration, queue_size=50, tcp_nodelay=True)
         self.autonomous_configuration_options = Autonomous_Configuration()
         self.selected_autonomous = ""
 
@@ -81,5 +82,8 @@ class AutonomousNode():
             rate.sleep()
 
     def get_selected_auto(self, selections : Autonomous_Selection) -> None:
+        """
+        Returns the selected autonomous from a mutex.
+        """
         with self.__lock:
             self.selected_autonomous = selections.autonomous
