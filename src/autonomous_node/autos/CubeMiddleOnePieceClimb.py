@@ -5,6 +5,7 @@ from actions_node.default_actions.ParallelAction import ParallelAction
 
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
 from actions_node.game_specific_actions.AutomatedActions import *
+from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 
 from ck_ros_msgs_node.msg import Arm_Goal
 
@@ -20,6 +21,7 @@ class CubeMiddleOnePieceClimb(AutoBase):
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
+            ResetPoseAction(self.get_unique_name()),
             ScoreCubeHigh(Arm_Goal.SIDE_BACK),
             MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
             MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_FRONT),
