@@ -6,6 +6,7 @@ from actions_node.default_actions.DriveTrajectoryAction import DriveTrajectoryAc
 
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
 from actions_node.game_specific_actions.AutomatedActions import *
+from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 
 class CorrectStart(AutoBase):
     """
@@ -19,5 +20,6 @@ class CorrectStart(AutoBase):
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
+            ResetPoseAction(self.get_unique_name()),
             self.trajectory_iterator.get_next_trajectory_action(),
         ])
