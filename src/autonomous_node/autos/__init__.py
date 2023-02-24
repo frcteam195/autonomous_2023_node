@@ -6,6 +6,7 @@ from autonomous_node.autos.CorrectStart import CorrectStart
 from autonomous_node.autos.CubeLoadingTwoPiece import CubeLoadingTwoPiece
 from autonomous_node.autos.CubeMiddleOnePieceClimb import CubeMiddleOnePieceClimb
 from autonomous_node.autos.CubeWallTwoPiece import CubeWallTwoPiece
+from autonomous_node.autos.ConeLoadingTwoPiece import ConeLoadingTwoPiece
 
 class AutonomousNames(str, Enum):
     """
@@ -17,6 +18,7 @@ class AutonomousNames(str, Enum):
     CubeLoadingTwoPiece = "Cube_Loading_TwoPiece"
     CubeMiddleOnePieceClimb = "Cube_Middle_OnePieceClimb"
     CubeWallTwoPiece = "Cube_Wall_TwoPiece"
+    ConeLoadingTwoPiece = "Cone_Loading_TwoPiece"
 
     def __str__(self) -> str:
         return str.__str__(self)
@@ -28,5 +30,6 @@ AUTONOMOUS_SELECTION_MAP = {
     AutonomousNames.CorrectStart: CorrectStart(),
     AutonomousNames.CubeLoadingTwoPiece: CubeLoadingTwoPiece(),
     AutonomousNames.CubeMiddleOnePieceClimb: CubeMiddleOnePieceClimb(),
-    AutonomousNames.CubeWallTwoPiece: CubeWallTwoPiece()
+    AutonomousNames.CubeWallTwoPiece: CubeWallTwoPiece(),
+    AutonomousNames.ConeLoadingTwoPiece: ConeLoadingTwoPiece()
 }
