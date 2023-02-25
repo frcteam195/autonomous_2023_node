@@ -24,7 +24,7 @@ class ConeWallTwoPiece(AutoBase):
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
             StopIntakeAction(True),
-            ScoreCubeHigh(Arm_Goal.SIDE_BACK),
+            ScoreConeHigh(Arm_Goal.SIDE_BACK),
             IntakeAction(False),
             ParallelAction([    
                 self.trajectory_iterator.get_next_trajectory_action(),
