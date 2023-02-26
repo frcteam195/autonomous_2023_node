@@ -34,9 +34,13 @@ class ConeLoadingThreePieceClimb(AutoBase):
                 ])
             ]),
             ParallelAction([
-                ScoreCubeHigh(Arm_Goal.SIDE_BACK),
-                self.trajectory_iterator.get_next_trajectory_action()
+                self.trajectory_iterator.get_next_trajectory_action(),
+                SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.5),
+                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
+                ])
             ]),
+            ScoreCubeHigh(Arm_Goal.SIDE_BACK),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
