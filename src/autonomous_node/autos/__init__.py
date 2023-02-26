@@ -21,7 +21,6 @@ class AutonomousNames(str, Enum):
     CubeLoadingThreePiece = "Cube_Loading_ThreePiece"
     CubeMiddleOnePieceClimb = "Cube_Middle_OnePieceClimb"
     CubeWallTwoPiece = "Cube_Wall_TwoPiece"
-    ConeLoadingThreePiece = "Cone_Loading_TwoPiece"
     ConeLoadingThreePieceClimb = "Cone_Loading_ThreePieceClimb"
     ConeLoadingThreePieceMiddle = "Cone_Loading_ThreePieceMiddle"
     ConeLoadingThreePiece = "Cone_Loading_ThreePiece"
