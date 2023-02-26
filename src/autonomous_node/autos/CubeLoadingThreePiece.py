@@ -11,7 +11,7 @@ from actions_node.game_specific_actions.StopIntakeAction import StopIntakeAction
 
 from ck_ros_msgs_node.msg import Arm_Goal
 
-class CubeLoadingTwoPiece(AutoBase):
+class CubeLoadingThreePiece(AutoBase):
     """
     Score two game pieces on the loading side.
     """
