@@ -29,7 +29,7 @@ class CubeLoadingTwoPiece(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.50),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.25),
                     IntakeAction(True)
                 ])
             ]),
@@ -37,7 +37,7 @@ class CubeLoadingTwoPiece(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
                     WaitAction(0.5),
-                    StopIntakeAction(True)
+                    StopIntakeAction(True),
                 ]),
                 SeriesAction([
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
@@ -45,5 +45,25 @@ class CubeLoadingTwoPiece(AutoBase):
                     MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180)
                 ])
             ]),
-            StopIntakeAction(False)
+            StopIntakeAction(False),
+            ParallelAction([
+                self.trajectory_iterator.get_next_trajectory_action(),
+                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
+                SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.50),
+                    IntakeAction(False)
+                ]),
+            ]),
+            ParallelAction([
+                self.trajectory_iterator.get_next_trajectory_action(),
+                SeriesAction([
+                    WaitAction(0.5),
+                    StopIntakeAction(True)
+                ]),
+            ]),
+            SeriesAction([
+                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
+                WaitUntilPercentCompletedTrajectoryAction(3, 0.55),
+                MoveArmAction(Arm_Goal.MID_CUBE, Arm_Goal.SIDE_BACK)
+            ])
         ])
