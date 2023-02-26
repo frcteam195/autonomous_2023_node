@@ -24,7 +24,7 @@ class ConeLoadingThreePieceClimb(AutoBase):
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
             #StopIntakeAction(True),
-            ScoreConeHigh(Arm_Goal.SIDE_BACK),
+            ScoreConeMiddle(Arm_Goal.SIDE_BACK),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
@@ -36,7 +36,7 @@ class ConeLoadingThreePieceClimb(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.5),
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.05),
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
                 ])
             ]),
@@ -52,7 +52,7 @@ class ConeLoadingThreePieceClimb(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(3, 0.5),
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.1),
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
                 ])
             ]),
@@ -62,4 +62,5 @@ class ConeLoadingThreePieceClimb(AutoBase):
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
             ]),
             StopIntakeAction(True)
+
         ]) 
