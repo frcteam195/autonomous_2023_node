@@ -21,7 +21,7 @@ class AutonomousNames(str, Enum):
     CubeLoadingThreePiece = "Cube_Loading_ThreePiece"
     CubeMiddleOnePieceClimb = "Cube_Middle_OnePieceClimb"
     CubeWallTwoPiece = "Cube_Wall_TwoPiece"
-    ConeLoadingTwoPiece = "Cone_Loading_TwoPiece"
+    ConeLoadingThreePiece = "Cone_Loading_TwoPiece"
     ConeLoadingThreePieceClimb = "Cone_Loading_ThreePieceClimb"
     ConeLoadingThreePieceMiddle = "Cone_Loading_ThreePieceMiddle"
     ConeLoadingThreePiece = "Cone_Loading_ThreePiece"
@@ -37,7 +37,6 @@ AUTONOMOUS_SELECTION_MAP = {
     AutonomousNames.CubeLoadingThreePiece: CubeLoadingThreePiece(),
     AutonomousNames.CubeMiddleOnePieceClimb: CubeMiddleOnePieceClimb(),
     AutonomousNames.CubeWallTwoPiece: CubeWallTwoPiece(),
-    AutonomousNames.ConeLoadingTwoPiece: ConeLoadingTwoPiece(),
     AutonomousNames.ConeLoadingThreePieceClimb: ConeLoadingThreePieceClimb(),
     AutonomousNames.ConeLoadingThreePieceMiddle: ConeLoadingThreePieceMiddle(),
     AutonomousNames.ConeLoadingThreePiece: ConeLoadingThreePiece()
