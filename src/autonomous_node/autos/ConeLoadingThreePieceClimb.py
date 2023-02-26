@@ -29,40 +29,32 @@ class ConeLoadingThreePieceClimb(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.5),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.25),
                     IntakeAction(False)
                 ])
             ]),
             StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.05),
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
-                ])
+                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
             ]),
             ScoreCubeHigh(Arm_Goal.SIDE_BACK),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.25),
                     IntakeAction(False)
                 ])
             ]),
             StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(3, 0.1),
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
-                ])
+                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
             ]),
             ScoreCubeMiddle(Arm_Goal.SIDE_BACK),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
-            ]),
-            StopIntakeAction(True)
-
+            ])
         ]) 
