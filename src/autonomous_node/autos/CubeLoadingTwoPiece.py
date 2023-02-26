@@ -25,22 +25,24 @@ class CubeLoadingTwoPiece(AutoBase):
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
             ScoreCubeHigh(Arm_Goal.SIDE_BACK),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.75),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.50),
                     IntakeAction(True)
                 ])
             ]),
             ParallelAction([
-                StopIntakeAction(True),
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
+                    WaitAction(0.5),
+                    StopIntakeAction(True)
+                ]),
+                SeriesAction([
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.75),
-                    MoveArmAction(Arm_Goal.HIGH_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180)
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.55),
+                    MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180)
                 ])
             ]),
             StopIntakeAction(False)
