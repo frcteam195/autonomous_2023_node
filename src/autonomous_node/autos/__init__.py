@@ -3,7 +3,7 @@ from enum import Enum
 from autonomous_node.autos.SimpleAuto import SimpleAuto
 from autonomous_node.autos.ToddCircle import ToddCircle
 from autonomous_node.autos.CorrectStart import CorrectStart
-from autonomous_2023_node.src.autonomous_node.autos.CubeLoadingThreePiece import CubeLoadingTwoPiece
+from autonomous_node.autos.CubeLoadingThreePiece import CubeLoadingThreePiece
 from autonomous_node.autos.CubeMiddleOnePieceClimb import CubeMiddleOnePieceClimb
 from autonomous_node.autos.CubeWallTwoPiece import CubeWallTwoPiece
 from autonomous_node.autos.ConeLoadingTwoPiece import ConeLoadingTwoPiece
@@ -20,7 +20,7 @@ class AutonomousNames(str, Enum):
     CubeLoadingThreePiece = "Cube_Loading_ThreePiece"
     CubeMiddleOnePieceClimb = "Cube_Middle_OnePieceClimb"
     CubeWallTwoPiece = "Cube_Wall_TwoPiece"
-    ConeLoadingTwoPiece = "Cone_Loading_TwoPiece"
+    ConeLoadingThreePiece = "Cone_Loading_TwoPiece"
     ConeLoadingThreePieceClimb = "Cone_Loading_ThreePieceClimb"
     ConeLoadingThreePieceMiddle = "Cone_Loading_ThreePieceMiddle"
 
@@ -32,10 +32,9 @@ AUTONOMOUS_SELECTION_MAP = {
     AutonomousNames.SimpleAuto: SimpleAuto(),
     AutonomousNames.ToddCircle: ToddCircle(),
     AutonomousNames.CorrectStart: CorrectStart(),
-    AutonomousNames.CubeLoadingTwoPiece: CubeLoadingTwoPiece(),
+    AutonomousNames.CubeLoadingThreePiece: CubeLoadingThreePiece(),
     AutonomousNames.CubeMiddleOnePieceClimb: CubeMiddleOnePieceClimb(),
     AutonomousNames.CubeWallTwoPiece: CubeWallTwoPiece(),
-    AutonomousNames.ConeLoadingTwoPiece: ConeLoadingTwoPiece(),
     AutonomousNames.ConeLoadingThreePieceClimb: ConeLoadingThreePieceClimb(),
     AutonomousNames.ConeLoadingThreePieceMiddle: ConeLoadingThreePieceMiddle()
 }
