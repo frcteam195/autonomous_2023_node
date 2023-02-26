@@ -23,16 +23,16 @@ class ConeLoadingThreePiece(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            #StopIntakeAction(True),
             ScoreConeMiddle(Arm_Goal.SIDE_BACK),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.5),
-                    IntakeAction(False, 0.5)
+                    IntakeAction(False)
                 ])
             ]),
+            StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
@@ -46,9 +46,10 @@ class ConeLoadingThreePiece(AutoBase):
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
-                    IntakeAction(False, 1.0)
+                    IntakeAction(False)
                 ])
             ]),
+            StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
@@ -56,6 +57,5 @@ class ConeLoadingThreePiece(AutoBase):
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
                 ])
             ]),
-            OuttakeAction(False, 2.0),
-            StopIntakeAction(True)
-        ]) 
+            OuttakeAction(True, 2.0)
+        ])
