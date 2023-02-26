@@ -3,7 +3,7 @@ from enum import Enum
 from autonomous_node.autos.SimpleAuto import SimpleAuto
 from autonomous_node.autos.ToddCircle import ToddCircle
 from autonomous_node.autos.CorrectStart import CorrectStart
-from autonomous_node.autos.CubeLoadingTwoPiece import CubeLoadingTwoPiece
+from autonomous_2023_node.src.autonomous_node.autos.CubeLoadingThreePiece import CubeLoadingTwoPiece
 from autonomous_node.autos.CubeMiddleOnePieceClimb import CubeMiddleOnePieceClimb
 from autonomous_node.autos.CubeWallTwoPiece import CubeWallTwoPiece
 from autonomous_node.autos.ConeLoadingTwoPiece import ConeLoadingTwoPiece
@@ -17,7 +17,7 @@ class AutonomousNames(str, Enum):
     SimpleAuto = "Test_Test_Auto"
     ToddCircle = "Test_Test_ToddCircle"
     CorrectStart = "Test_Test_CorrectStart"
-    CubeLoadingTwoPiece = "Cube_Loading_TwoPiece"
+    CubeLoadingThreePiece = "Cube_Loading_ThreePiece"
     CubeMiddleOnePieceClimb = "Cube_Middle_OnePieceClimb"
     CubeWallTwoPiece = "Cube_Wall_TwoPiece"
     ConeLoadingTwoPiece = "Cone_Loading_TwoPiece"
