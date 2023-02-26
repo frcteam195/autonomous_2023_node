@@ -29,8 +29,8 @@ class ConeLoadingThreePiece(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.75),
-                    IntakeAction(False)
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.5),
+                    IntakeAction(False, 0.5)
                 ])
             ]),
             ParallelAction([
@@ -45,7 +45,7 @@ class ConeLoadingThreePiece(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.75),
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
                     IntakeAction(False, 1.0)
                 ])
             ]),
