@@ -28,10 +28,10 @@ class CubeMiddleOnePieceClimb(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_FRONT),
-                SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.75),
-                    IntakeAction(True),
-                ])
+                # SeriesAction([
+                #     WaitUntilPercentCompletedTrajectoryAction(0, 0.75),
+                #     IntakeAction(True),
+                # ])
             ]),
             ParallelAction([
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
