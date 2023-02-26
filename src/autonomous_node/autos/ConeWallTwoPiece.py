@@ -10,13 +10,13 @@ from actions_node.default_actions.WaitUntilPercentCompletedTrajectoryAction impo
 
 from ck_ros_msgs_node.msg import Arm_Goal
 
-class CubeWallTwoPiece(AutoBase):
+class ConeWallTwoPiece(AutoBase):
     """
     Score two game pieces on the wall side.
     """
     def __init__(self) -> None:
         super().__init__(display_name="TwoPiece",
-                         game_piece=GamePiece.Cube,
+                         game_piece=GamePiece.Cone,
                          start_position=StartPosition.Wall,
                          expected_trajectory_count=2)
 
@@ -24,12 +24,13 @@ class CubeWallTwoPiece(AutoBase):
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
             StopIntakeAction(True),
-            ScoreCubeHigh(Arm_Goal.SIDE_BACK),
+            ScoreConeHigh(Arm_Goal.SIDE_BACK),
+            IntakeAction(False),
             ParallelAction([    
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.75),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.95), 
                     IntakeAction(True, 1.0)
                 ])
             ]),
