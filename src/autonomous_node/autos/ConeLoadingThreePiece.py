@@ -55,7 +55,7 @@ class ConeLoadingThreePiece(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.5),
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
+                    #SMoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
                 ])
             ]),
             OuttakeAction(True, 2.0)
