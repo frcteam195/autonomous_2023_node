@@ -53,7 +53,7 @@ class ConeLoadingThreePieceMidLink(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(3, 0.3),
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.4),
                     ScoreCubeMiddle(Arm_Goal.SIDE_BACK),
                     MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.8),
