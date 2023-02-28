@@ -10,12 +10,12 @@ from actions_node.game_specific_actions.AutomatedActions import *
 from ck_ros_msgs_node.msg import Arm_Goal
 from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 
-class ConeLoadingThreePieceClimb(AutoBase):
+class ConeLoadingThreePieceClimbTest(AutoBase):
     """
     Score two game pieces on the loading side.
     """
     def __init__(self) -> None:
-        super().__init__(display_name="ThreePieceClimb",
+        super().__init__(display_name="ThreePieceClimbTest",
                          game_piece=GamePiece.Cone,
                          start_position=StartPosition.Loading,
                          expected_trajectory_count=5)
