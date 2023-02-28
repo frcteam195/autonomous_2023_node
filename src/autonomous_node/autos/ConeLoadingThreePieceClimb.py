@@ -37,9 +37,13 @@ class ConeLoadingThreePieceClimb(AutoBase):
             StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
+                SeriesAction([
+                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.4),
+                    MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_BACK)
+                ])
             ]),
-            ScoreCubeHigh(Arm_Goal.SIDE_BACK),
+            OuttakeAction(True, 0.1),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
@@ -51,11 +55,16 @@ class ConeLoadingThreePieceClimb(AutoBase):
             StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
+                SeriesAction([
+                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.4),
+                    MoveArmAction(Arm_Goal.MID_CUBE, Arm_Goal.SIDE_BACK)
+                ])
             ]),
-            ScoreCubeMiddle(Arm_Goal.SIDE_BACK),
+            OuttakeAction(True, 0.1),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
             ])
         ]) 
+    
