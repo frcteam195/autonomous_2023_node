@@ -5,7 +5,7 @@ from autonomous_node.autos.ConeLoadingThreePieceClimb import ConeLoadingThreePie
 from autonomous_node.autos.ConeLoadingThreePiece import ConeLoadingThreePiece
 from autonomous_node.autos.ConeLoadingThreePieceClimbTest import ConeLoadingThreePieceClimbTest
 from autonomous_node.autos.ConeLoadingThreePieceMidLink import ConeLoadingThreePieceMidLink
-
+from autonomous_node.autos.Cone_Loading_TwoPieceClimb import ConeLoadingTwoPieceClimb
 class AutonomousNames(str, Enum):
     """
     Format must be PRELOAD_STARTINGPOSITION_ANYNAMENOTINCLUDINGAKEYWORDFORPRELOADORSTARTINGPOSITION
@@ -15,7 +15,7 @@ class AutonomousNames(str, Enum):
     ConeLoadingThreePiece = "Cone_Loading_ThreePiece"
     ConeLoadingThreePieceClimbTest = "Cone_Loading_ThreePieceClimb_Test"
     ConeLoadingThreePieceMidLink = "Cone_Loading_ThreePieceMidLink"
-
+    ConeLoadingTwoPieceClimb = "Cone_Loading_TwoPieceClimb"
     def __str__(self) -> str:
         return str.__str__(self)
 
@@ -25,5 +25,6 @@ AUTONOMOUS_SELECTION_MAP = {
     AutonomousNames.ConeLoadingThreePieceClimb: ConeLoadingThreePieceClimb(),
     AutonomousNames.ConeLoadingThreePiece: ConeLoadingThreePiece(),
     AutonomousNames.ConeLoadingThreePieceClimbTest: ConeLoadingThreePieceClimbTest(),
-    AutonomousNames.ConeLoadingThreePieceMidLink: ConeLoadingThreePieceMidLink()
+    AutonomousNames.ConeLoadingThreePieceMidLink: ConeLoadingThreePieceMidLink(),
+    AutonomousNames.ConeLoadingTwoPieceClimb: ConeLoadingTwoPieceClimb()
 }
