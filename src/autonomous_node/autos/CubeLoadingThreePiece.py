@@ -16,7 +16,7 @@ class CubeLoadingThreePiece(AutoBase):
     Score two game pieces on the loading side.
     """
     def __init__(self) -> None:
-        super().__init__(display_name="TwoPiece",
+        super().__init__(display_name="ThreePiece",
                          game_piece=GamePiece.Cube,
                          start_position=StartPosition.Loading,
                          expected_trajectory_count=2)

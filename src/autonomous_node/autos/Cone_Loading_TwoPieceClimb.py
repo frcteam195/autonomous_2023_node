@@ -19,7 +19,7 @@ class ConeLoadingTwoPieceClimb(AutoBase):
         super().__init__(display_name="TwoPieceClimb",
                          game_piece=GamePiece.Cone,
                          start_position=StartPosition.Loading,
-                         expected_trajectory_count=5)
+                         expected_trajectory_count=3)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
