@@ -23,27 +23,27 @@ class ConeLoadingTwoPieceClimb(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            #StopIntakeAction(True),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
             ScoreConeMiddle(Arm_Goal.SIDE_BACK),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.25),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.5),
                     IntakeAction(False)
                 ])
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
+                StopIntakeAction(False),
                 SeriesAction([
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.7),
-                    MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_BACK)
+                    MoveArmAction(Arm_Goal.MID_CUBE, Arm_Goal.SIDE_BACK)
                 ])
             ]),
-            OuttakeAction(True, 0.1),
-            StopIntakeAction(True),
+            OuttakeAction(False, 0.1),
+            StopIntakeAction(False),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
