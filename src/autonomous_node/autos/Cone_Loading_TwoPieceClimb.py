@@ -9,6 +9,7 @@ from actions_node.game_specific_actions.AutomatedActions import *
 
 from ck_ros_msgs_node.msg import Arm_Goal
 from actions_node.default_actions.ResetPoseAction import ResetPoseAction
+from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection
 
 class ConeLoadingTwoPieceClimb(AutoBase):
     """
@@ -47,6 +48,8 @@ class ConeLoadingTwoPieceClimb(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
-            ])
+            ]),
+            AutoBalanceAction(BalanceDirection.PITCH, 3)
         ]) 
+
     
