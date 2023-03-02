@@ -23,6 +23,7 @@ class StartPosition(Enum):
     Wall = 1
     Middle = 2
     Loading = 3
+    Bump = 4
 
 class AutoBase(ABC):
     """
