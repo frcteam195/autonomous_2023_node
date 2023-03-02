@@ -26,13 +26,16 @@ class AutonomousNames(str, Enum):
         return str.__str__(self)
 
 
-AUTONOMOUS_SELECTION_MAP = {
-    AutonomousNames.AutoBalance: AutoBalance(),
-    AutonomousNames.CubeLoadingThreePiece: CubeLoadingThreePiece(),
-    AutonomousNames.ConeLoadingThreePieceClimb: ConeLoadingThreePieceClimb(),
-    AutonomousNames.ConeLoadingThreePiece: ConeLoadingThreePiece(),
-    AutonomousNames.ConeLoadingThreePieceClimbTest: ConeLoadingThreePieceClimbTest(),
-    AutonomousNames.ConeLoadingThreePieceMidLink: ConeLoadingThreePieceMidLink(),
-    AutonomousNames.ConeLoadingTwoPieceClimb: ConeLoadingTwoPieceClimb(),
-    AutonomousNames.Cube_Bump_FiveScore: Cube_Bump_FiveScore()
-}
+AUTONOMOUS_SELECTION_MAP = {}
+
+def init_auto_selection_map():
+    return {
+        AutonomousNames.AutoBalance: AutoBalance(),
+        AutonomousNames.CubeLoadingThreePiece: CubeLoadingThreePiece(),
+        AutonomousNames.ConeLoadingThreePieceClimb: ConeLoadingThreePieceClimb(),
+        AutonomousNames.ConeLoadingThreePiece: ConeLoadingThreePiece(),
+        AutonomousNames.ConeLoadingThreePieceClimbTest: ConeLoadingThreePieceClimbTest(),
+        AutonomousNames.ConeLoadingThreePieceMidLink: ConeLoadingThreePieceMidLink(),
+        AutonomousNames.ConeLoadingTwoPieceClimb: ConeLoadingTwoPieceClimb(),
+        AutonomousNames.Cube_Bump_FiveScore: Cube_Bump_FiveScore()
+    }
