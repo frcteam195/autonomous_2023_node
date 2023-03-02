@@ -5,6 +5,7 @@ from actions_node.default_actions.SeriesAction import SeriesAction
 from actions_node.default_actions.ParallelAction import ParallelAction
 
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
+from actions_node.game_specific_actions.LaunchAction import LaunchAction
 from actions_node.game_specific_actions.AutomatedActions import *
 
 from ck_ros_msgs_node.msg import Arm_Goal
@@ -25,7 +26,7 @@ class Cube_Bump_FiveScore(AutoBase):
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
-            OuttakeAction(False, 0.4),
+            LaunchAction(True, 0.4),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
@@ -36,10 +37,10 @@ class Cube_Bump_FiveScore(AutoBase):
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                StopIntakeAction(False),
+                StopIntakeAction(True),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT)
             ]),
-            OuttakeAction(False, 0.4),
+            LaunchAction(True, 0.4),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
@@ -50,10 +51,10 @@ class Cube_Bump_FiveScore(AutoBase):
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                StopIntakeAction(False),
+                StopIntakeAction(True),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT)
             ]),
-            OuttakeAction(False, 0.4),
+            LaunchAction(True, 0.4),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
@@ -64,10 +65,10 @@ class Cube_Bump_FiveScore(AutoBase):
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                StopIntakeAction(False),
+                StopIntakeAction(True),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT)
             ]),
-            OuttakeAction(False, 0.4),
+            LaunchAction(True, 0.4),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
@@ -78,9 +79,9 @@ class Cube_Bump_FiveScore(AutoBase):
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                StopIntakeAction(False),
+                StopIntakeAction(True),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT)
             ]),
-            OuttakeAction(False, 0.4),
+            LaunchAction(True, 0.4),
         ])
     
