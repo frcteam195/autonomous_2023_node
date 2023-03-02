@@ -1,5 +1,6 @@
 from enum import Enum
 
+from autonomous_node.autos.AutoBalance import AutoBalance
 from autonomous_node.autos.CubeLoadingThreePiece import CubeLoadingThreePiece
 from autonomous_node.autos.ConeLoadingThreePieceClimb import ConeLoadingThreePieceClimb
 from autonomous_node.autos.ConeLoadingThreePiece import ConeLoadingThreePiece
@@ -12,6 +13,7 @@ class AutonomousNames(str, Enum):
     """
     Format must be PRELOAD_STARTINGPOSITION_ANYNAMENOTINCLUDINGAKEYWORDFORPRELOADORSTARTINGPOSITION
     """
+    AutoBalance = "Test_Test_AutoBalance"
     CubeLoadingThreePiece = "Cube_Loading_ThreePiece"
     ConeLoadingThreePieceClimb = "Cone_Loading_ThreePieceClimb"
     ConeLoadingThreePiece = "Cone_Loading_ThreePiece"
@@ -25,6 +27,7 @@ class AutonomousNames(str, Enum):
 
 
 AUTONOMOUS_SELECTION_MAP = {
+    AutonomousNames.AutoBalance: AutoBalance(),
     AutonomousNames.CubeLoadingThreePiece: CubeLoadingThreePiece(),
     AutonomousNames.ConeLoadingThreePieceClimb: ConeLoadingThreePieceClimb(),
     AutonomousNames.ConeLoadingThreePiece: ConeLoadingThreePiece(),
