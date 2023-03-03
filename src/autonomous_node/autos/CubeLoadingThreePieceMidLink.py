@@ -36,11 +36,8 @@ class CubeLoadingThreePieceMidLink(AutoBase):
             StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.4),
-                    MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_BACK)
-                ])
+                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
+            
             ]),
             ScoreConeMiddle(Arm_Goal.SIDE_BACK),
             ParallelAction([
@@ -54,11 +51,10 @@ class CubeLoadingThreePieceMidLink(AutoBase):
             StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
-                    WaitUntilPercentCompletedTrajectoryAction(3, 0.4),
-                    MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_BACK)
-                ])
+                
+                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
+                    
+            
             ]),
             ScoreConeMiddle(Arm_Goal.SIDE_BACK),
             ParallelAction([
