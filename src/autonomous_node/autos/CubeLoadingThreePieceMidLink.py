@@ -65,5 +65,4 @@ class CubeLoadingThreePieceMidLink(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
             ])
-        ]) 
-    
+        ])
