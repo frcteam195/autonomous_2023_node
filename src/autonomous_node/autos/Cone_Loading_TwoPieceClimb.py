@@ -49,9 +49,7 @@ class ConeLoadingTwoPieceClimb(AutoBase):
             StopIntakeAction(False),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180)
+                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO)
             ]),
-            AutoBalanceAction(BalanceDirection.PITCH, 3, RobotDirection.FRONT)
-        ]) 
-
-    
+            AutoBalanceAction(BalanceDirection.PITCH, 5, RobotDirection.FRONT)
+        ])
