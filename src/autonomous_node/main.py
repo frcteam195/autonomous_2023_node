@@ -12,8 +12,9 @@ from frc_robot_utilities_py_node.frc_robot_utilities_py import *
 from frc_robot_utilities_py_node.RobotStatusHelperPy import RobotStatusHelperPy, Alliance, RobotMode
 from autonomous_node.autos import AUTONOMOUS_SELECTION_MAP, AutonomousNames
 from autonomous_node.autos.AutoBase import AutoBase
+from actions_node.default_actions.Action import Action
 from autonomous_node.autos import CorrectStart
-
+from autonomous_node.autos import init_auto_selection_map
 from threading import RLock
 
 
@@ -37,9 +38,12 @@ class AutonomousNode():
 
         self.__prev_robot_mode = RobotMode.DISABLED
         self.__selected_auto : AutoBase = None
-
+        self.__prev_selected_auto : AutoBase = None
+        self.__selected_auto_action : Action = None
 
         register_for_robot_updates()
+        global AUTONOMOUS_SELECTION_MAP
+        AUTONOMOUS_SELECTION_MAP = init_auto_selection_map()
         loop_thread = Thread(target=self.loop)
         loop_thread.start()
         rospy.spin()
@@ -60,7 +64,7 @@ class AutonomousNode():
             try:
                 with self.__lock:
                     if AutonomousNames(self.selected_autonomous) in AUTONOMOUS_SELECTION_MAP:
-                        self.__selected_auto = AUTONOMOUS_SELECTION_MAP[AutonomousNames(self.selected_autonomous)]
+                        self.__selected_auto : AutoBase = AUTONOMOUS_SELECTION_MAP[AutonomousNames(self.selected_autonomous)]
                     else:
                         self.__selected_auto = None
             except:
@@ -71,12 +75,16 @@ class AutonomousNode():
                 # Start the action on the transition from Disabled to Auto.
                 if self.__prev_robot_mode == RobotMode.DISABLED:
                     if self.__selected_auto is not None:
-                        self.runner.start_action(self.__selected_auto.get_action())
+                        self.runner.start_action(self.__selected_auto_action)
+                        self.__prev_selected_auto = None
             elif robot_mode == RobotMode.DISABLED:
+                if self.__selected_auto != self.__prev_selected_auto:
+                    self.__selected_auto_action = self.__selected_auto.get_action()
                 if self.__selected_auto is not None:
                     self.__selected_auto.reset()
 
             self.__prev_robot_mode = robot_mode
+            self.__prev_selected_auto = self.__selected_auto
             self.runner.loop(robot_mode)
 
             rate.sleep()
