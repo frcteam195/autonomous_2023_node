@@ -68,7 +68,7 @@ class AutonomousNode():
                     else:
                         self.__selected_auto = None
             except:
-                rospy.logerr_throttle(period=10,msg="Invalid auto string received!")
+                rospy.logerr_throttle(period=10,msg=f"Invalid auto string received! {self.selected_autonomous}")
                 self.__selected_auto = None
 
             if robot_mode == RobotMode.AUTONOMOUS:
