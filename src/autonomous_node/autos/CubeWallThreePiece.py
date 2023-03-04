@@ -57,8 +57,7 @@ class CubeWallThreePiece(AutoBase):
             
             ]),
             ScoreConeMiddle(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
-            ParallelAction([
-                self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK)
-            ])
+            
+            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK)
+            
         ])
