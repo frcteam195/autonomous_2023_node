@@ -23,11 +23,11 @@ class ConeLoadingThreePiece(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
-            ScoreConeMiddle(Arm_Goal.SIDE_BACK),
+            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
+            ScoreConeMiddle(Arm_Goal.SIDE_FRONT),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.5),
                     IntakeAction(False)
@@ -38,13 +38,13 @@ class ConeLoadingThreePiece(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.5),
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK)
+                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT)
                 ])
             ]),
-            ScoreCubeHigh(Arm_Goal.SIDE_BACK),
+            ScoreCubeHigh(Arm_Goal.SIDE_FRONT),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
                     IntakeAction(False)
