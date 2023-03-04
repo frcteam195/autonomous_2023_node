@@ -29,11 +29,13 @@ class CubeWallThreePiece(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.20),
+                    StopIntakeAction(True),
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.25),
-                    IntakeAction(True, 1.5)
+                    IntakeAction(True)
                 ])
             ]),
-            #StopIntakeAction(True),
+            
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
@@ -45,13 +47,15 @@ class CubeWallThreePiece(AutoBase):
                 MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.25),
-                    IntakeAction(True, 1.5)
+                    IntakeAction(True)
                 ])
             ]),
-            #StopIntakeAction(True),
+            
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.20),
+                    StopIntakeAction(True),
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.60),
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
                 ])
