@@ -23,11 +23,11 @@ class CubeLoadingThreePieceMidLink(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
-            ScoreCubeMiddle(Arm_Goal.SIDE_BACK),
+            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
+            ScoreCubeMiddle(Arm_Goal.SIDE_FRONT),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.25),
                     IntakeAction(True)
@@ -36,13 +36,13 @@ class CubeLoadingThreePieceMidLink(AutoBase):
             StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
+                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             
             ]),
-            ScoreConeMiddle(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
+            ScoreConeMiddle(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.25),
                     IntakeAction(True)
@@ -52,13 +52,13 @@ class CubeLoadingThreePieceMidLink(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 
-                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
+                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
                     
             
             ]),
-            ScoreConeMiddle(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
+            ScoreConeMiddle(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
+                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK)
             ])
         ])
