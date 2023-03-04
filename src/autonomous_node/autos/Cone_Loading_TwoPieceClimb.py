@@ -25,13 +25,13 @@ class ConeLoadingTwoPieceClimb(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
-            ScoreConeHigh(Arm_Goal.SIDE_BACK),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
+            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
+            ScoreConeHigh(Arm_Goal.SIDE_FRONT),
+            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             WaitAction(0.5),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.5),
                     IntakeAction(True)
@@ -41,9 +41,9 @@ class ConeLoadingTwoPieceClimb(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 StopIntakeAction(True),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
+                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.85),
-                    MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180)
+                    MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180)
                 ])
             ]),
             StopIntakeAction(False),
@@ -51,5 +51,5 @@ class ConeLoadingTwoPieceClimb(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO)
             ]),
-            AutoBalanceAction(BalanceDirection.PITCH, 8, RobotDirection.FRONT)
+            AutoBalanceAction(BalanceDirection.PITCH, 8, RobotDirection.BACK)
         ])

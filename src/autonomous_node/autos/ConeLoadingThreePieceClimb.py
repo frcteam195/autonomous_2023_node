@@ -24,11 +24,11 @@ class ConeLoadingThreePieceClimb(AutoBase):
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
             #StopIntakeAction(True),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
-            ScoreConeMiddle(Arm_Goal.SIDE_BACK),
+            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
+            ScoreConeMiddle(Arm_Goal.SIDE_FRONT),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.25),
                     IntakeAction(False)
@@ -38,15 +38,15 @@ class ConeLoadingThreePieceClimb(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
+                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.4),
-                    MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_BACK)
+                    MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT)
                 ])
             ]),
             OuttakeAction(True, 0.1),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.25),
                     IntakeAction(False)
@@ -56,15 +56,15 @@ class ConeLoadingThreePieceClimb(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
+                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.4),
-                    MoveArmAction(Arm_Goal.MID_CUBE, Arm_Goal.SIDE_BACK)
+                    MoveArmAction(Arm_Goal.MID_CUBE, Arm_Goal.SIDE_FRONT)
                 ])
             ]),
             OuttakeAction(True, 0.1),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
+                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK)
             ])
         ]) 
     

@@ -21,7 +21,7 @@ class AutonomousNames(str, Enum):
     ConeLoadingThreePieceClimbTest = "Cone_Loading_ThreePieceClimb_Test"
     ConeLoadingThreePieceMidLink = "Cone_Loading_ThreePieceMidLink"
     ConeLoadingTwoPieceClimb = "Cone_Loading_TwoPieceClimb"
-    Cube_Bump_FiveScore = "Cube_Bump_FiveScore"
+    #Cube_Bump_FiveScore = "Cube_Bump_FiveScore"
     CubeLoadingThreePieceMidLink = "Cube_Loading_ThreePieceMidLink"
 
     def __str__(self) -> str:
@@ -39,6 +39,6 @@ def init_auto_selection_map():
         AutonomousNames.ConeLoadingThreePieceClimbTest: ConeLoadingThreePieceClimbTest(),
         AutonomousNames.ConeLoadingThreePieceMidLink: ConeLoadingThreePieceMidLink(),
         AutonomousNames.ConeLoadingTwoPieceClimb: ConeLoadingTwoPieceClimb(),
-        AutonomousNames.Cube_Bump_FiveScore: Cube_Bump_FiveScore(),
+        #AutonomousNames.Cube_Bump_FiveScore: Cube_Bump_FiveScore(),
         AutonomousNames.CubeLoadingThreePieceMidLink: CubeLoadingThreePieceMidLink()
     }
