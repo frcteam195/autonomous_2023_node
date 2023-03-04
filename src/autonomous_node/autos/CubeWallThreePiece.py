@@ -51,8 +51,11 @@ class CubeWallThreePiece(AutoBase):
             StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                
-                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
+                SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.60),
+                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
+                ])
+               
                     
             
             ]),
