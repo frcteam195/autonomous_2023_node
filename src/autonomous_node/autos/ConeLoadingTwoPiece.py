@@ -24,10 +24,10 @@ class ConeLoadingTwoPiece(AutoBase):
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
             StopIntakeAction(True),
-            ScoreConeHigh(Arm_Goal.SIDE_BACK),
+            ScoreConeHigh(Arm_Goal.SIDE_FRONT),
             ParallelAction([    
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.75),
                     IntakeAction(True)
@@ -36,7 +36,7 @@ class ConeLoadingTwoPiece(AutoBase):
             ]),
             ParallelAction([
                 StopIntakeAction(True),
-                MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
+                MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
                 self.trajectory_iterator.get_next_trajectory_action()
             ]),
             StopIntakeAction(False)
