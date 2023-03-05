@@ -24,7 +24,7 @@ class ConeLoadingTwoPieceClimb(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+            MoveArmAction(Arm_Goal.LOW_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             StopIntakeAction(False),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
@@ -36,17 +36,12 @@ class ConeLoadingTwoPieceClimb(AutoBase):
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.25),
-                    StopIntakeAction(True)
-                ]),
-                MoveArmAction(Arm_Goal.LOW_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
-
+                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             ]),
+            StopIntakeAction(True),
+            MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             StopIntakeAction(False),
-            ParallelAction([
-                self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO)
-            ]),
+            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+            self.trajectory_iterator.get_next_trajectory_action(),
             AutoBalanceAction(BalanceDirection.PITCH, 18.0, RobotDirection.BACK)
         ])

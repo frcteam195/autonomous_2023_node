@@ -19,5 +19,5 @@ class AutoBalance(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            AutoBalanceAction(BalanceDirection.PITCH, 1.0, RobotDirection.FRONT)
+            AutoBalanceAction(BalanceDirection.PITCH, 1.0, RobotDirection.BACK)
         ])
