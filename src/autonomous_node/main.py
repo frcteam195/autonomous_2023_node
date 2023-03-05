@@ -79,7 +79,10 @@ class AutonomousNode():
                         self.__prev_selected_auto = None
             elif robot_mode == RobotMode.DISABLED:
                 if self.__selected_auto != self.__prev_selected_auto:
-                    self.__selected_auto_action = self.__selected_auto.get_action()
+                    if self.__selected_auto != None:
+                        self.__selected_auto_action = self.__selected_auto.get_action()
+                    else:
+                        rospy.logerr_throttle(period=10,msg=f"Selected auto is none! {self.selected_autonomous}")
                 if self.__selected_auto is not None:
                     self.__selected_auto.reset()
 
