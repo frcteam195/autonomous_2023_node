@@ -28,13 +28,13 @@ class ConeLoadingTwoPieceClimb(AutoBase):
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             ScoreConeHigh(Arm_Goal.SIDE_FRONT),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
-            WaitAction(0.25),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.25),
                     IntakeAction(True)
+
                 ])
             ]),
             ParallelAction([
