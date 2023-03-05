@@ -1,16 +1,15 @@
-from actions_node.default_actions.WaitUntilPercentCompletedTrajectoryAction import WaitUntilPercentCompletedTrajectoryAction
-from actions_node.default_actions.WaitAction import WaitAction
 from autonomous_node.autos.AutoBase import AutoBase, GamePiece, StartPosition
 
+from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 from actions_node.default_actions.SeriesAction import SeriesAction
 from actions_node.default_actions.ParallelAction import ParallelAction
+from actions_node.default_actions.WaitUntilPercentCompletedTrajectoryAction import WaitUntilPercentCompletedTrajectoryAction
 
-from actions_node.game_specific_actions.IntakeAction import IntakeAction
 from actions_node.game_specific_actions.AutomatedActions import *
+from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection, RobotDirection
+from actions_node.game_specific_actions.IntakeAction import IntakeAction
 
 from ck_ros_msgs_node.msg import Arm_Goal
-from actions_node.default_actions.ResetPoseAction import ResetPoseAction
-from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection, RobotDirection
 
 class ConeLoadingTwoPieceClimb(AutoBase):
     """
@@ -25,9 +24,8 @@ class ConeLoadingTwoPieceClimb(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
-            ScoreConeHigh(Arm_Goal.SIDE_FRONT),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
+            MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+            StopIntakeAction(False),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_BACK),
@@ -38,19 +36,17 @@ class ConeLoadingTwoPieceClimb(AutoBase):
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                StopIntakeAction(True),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.20),
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.80),
-                    MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180)
-                ])
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.25),
+                    StopIntakeAction(True)
+                ]),
+                MoveArmAction(Arm_Goal.LOW_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
+
             ]),
             StopIntakeAction(False),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO)
             ]),
-            AutoBalanceAction(BalanceDirection.PITCH, 8, RobotDirection.BACK)
+            AutoBalanceAction(BalanceDirection.PITCH, 18.0, RobotDirection.BACK)
         ])
