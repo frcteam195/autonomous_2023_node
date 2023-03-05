@@ -42,6 +42,12 @@ class ConeLoadingTwoPieceClimb(AutoBase):
             MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             StopIntakeAction(False),
             MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
-            self.trajectory_iterator.get_next_trajectory_action(),
-            AutoBalanceAction(BalanceDirection.PITCH, 18.0, RobotDirection.BACK)
+            ParallelAction([
+                self.trajectory_iterator.get_next_trajectory_action(),
+                SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
+                    MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+                ])
+            ]),
+            #AutoBalanceAction(BalanceDirection.ROLL)
         ])
