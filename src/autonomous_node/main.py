@@ -9,7 +9,7 @@ from actions_node.ActionRunner import ActionRunner
 from ck_ros_msgs_node.msg import Autonomous_Configuration, Autonomous_Selection
 
 from frc_robot_utilities_py_node.frc_robot_utilities_py import *
-from frc_robot_utilities_py_node.RobotStatusHelperPy import RobotStatusHelperPy, Alliance, RobotMode
+from frc_robot_utilities_py_node.RobotStatusHelperPy import RobotMode
 from autonomous_node.autos import AUTONOMOUS_SELECTION_MAP, AutonomousNames
 from autonomous_node.autos.AutoBase import AutoBase
 from actions_node.default_actions.Action import Action
