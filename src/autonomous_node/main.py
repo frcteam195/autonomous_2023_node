@@ -63,12 +63,12 @@ class AutonomousNode():
 
             try:
                 with self.__lock:
-                    if AutonomousNames(self.selected_autonomous) in AUTONOMOUS_SELECTION_MAP:
+                    if self.__selected_auto is None and AutonomousNames(self.selected_autonomous) in AUTONOMOUS_SELECTION_MAP:
                         self.__selected_auto : AutoBase = AUTONOMOUS_SELECTION_MAP[AutonomousNames(self.selected_autonomous)]
-                    else:
+                    elif AutonomousNames(self.selected_autonomous) not in AUTONOMOUS_SELECTION_MAP:
                         self.__selected_auto = None
             except:
-                rospy.logerr_throttle(period=10,msg=f"Invalid auto string received! {self.selected_autonomous}")
+                rospy.logerr_throttle_identical(period=10,msg=f"Invalid auto string received! {self.selected_autonomous}")
                 self.__selected_auto = None
 
             if robot_mode == RobotMode.AUTONOMOUS:
@@ -78,11 +78,17 @@ class AutonomousNode():
                         self.runner.start_action(self.__selected_auto_action)
                         self.__prev_selected_auto = None
             elif robot_mode == RobotMode.DISABLED:
+                if self.__prev_robot_mode == RobotMode.AUTONOMOUS:
+                    self.__selected_auto = None
+
                 if self.__selected_auto != self.__prev_selected_auto:
                     if self.__selected_auto != None:
                         self.__selected_auto_action = self.__selected_auto.get_action()
+                    elif self.__prev_robot_mode == RobotMode.AUTONOMOUS:
+                        pass
                     else:
-                        rospy.logerr_throttle(period=10,msg=f"Selected auto is none! {self.selected_autonomous}")
+                        rospy.logerr_throttle_identical(period=10,msg=f"Selected auto is none! {self.selected_autonomous}")
+                        
                 if self.__selected_auto is not None:
                     self.__selected_auto.reset()
 
