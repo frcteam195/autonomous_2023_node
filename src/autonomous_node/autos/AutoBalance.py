@@ -19,5 +19,6 @@ class AutoBalance(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            AutoBalanceAction(BalanceDirection.PITCH, 1.0, RobotDirection.BACK)
+            MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
+            AutoBalanceAction(BalanceDirection.ROLL)
         ])
