@@ -30,11 +30,11 @@ class ConeLoadingMidLink(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
             ]),
-            MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_BACK),
-            IntakeAction(True, 1),
+            MoveArmAction(Arm_Goal.GROUND_DEAD_CONE, Arm_Goal.SIDE_BACK),
+            IntakeAction(True, 0.25),
                 
             
-            #StopIntakeAction(True),
+            StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
