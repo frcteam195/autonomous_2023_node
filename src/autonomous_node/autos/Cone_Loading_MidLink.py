@@ -6,6 +6,7 @@ from actions_node.default_actions.ParallelAction import ParallelAction
 
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
 from actions_node.game_specific_actions.AutomatedActions import *
+from actions_node.game_specific_actions.LaunchAction import *
 
 from ck_ros_msgs_node.msg import Arm_Goal
 from actions_node.default_actions.ResetPoseAction import ResetPoseAction
@@ -43,7 +44,8 @@ class ConeLoadingMidLink(AutoBase):
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             ]),
 
-            ScoreConeMiddle(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
+            LaunchAction(0.5, 1),
+            #ScoreConeMiddle(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
