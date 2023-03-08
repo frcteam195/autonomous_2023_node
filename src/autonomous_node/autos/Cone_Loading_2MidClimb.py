@@ -35,8 +35,8 @@ class ConeLoading2MidClimb(AutoBase):
                     IntakeAction(False)
                 ])
             ]),
-            StopIntakeAction(False),
             ParallelAction([
+                StopIntakeAction(False),
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             ]),
