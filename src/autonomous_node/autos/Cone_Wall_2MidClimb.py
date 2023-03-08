@@ -28,9 +28,10 @@ class ConeWall2MidClimb(AutoBase):
             StopIntakeAction(False),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.5),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.4),
+                    MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.8),
                     IntakeAction(False)
                 ])
             ]),
@@ -40,14 +41,10 @@ class ConeWall2MidClimb(AutoBase):
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             ]),
             MoveArmAction(Arm_Goal.MID_CUBE, Arm_Goal.SIDE_FRONT),
-            OuttakeAction(False, 0.1),
-            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
+            OuttakeAction(False, 0.2),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.25),
-                    MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
-                ])
+                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
             ]),
-            AutoBalanceAction(BalanceDirection.ROLL, 90.0)
+            AutoBalanceAction(BalanceDirection.ROLL, 270)
         ])
