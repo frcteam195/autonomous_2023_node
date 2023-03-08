@@ -52,13 +52,13 @@ class ConeLoadingMidLink(AutoBase):
                     IntakeAction(False)
                 ])
             ]),
-            
+
             ParallelAction([
                 StopIntakeAction(True),
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT)
             ]),
-            LaunchAction(False, 0.5, 1),
+            LaunchAction(False, 1, 0.5),
             #ScoreCubeMiddle(Arm_Goal.SIDE_FRONT),
             #MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
         ])

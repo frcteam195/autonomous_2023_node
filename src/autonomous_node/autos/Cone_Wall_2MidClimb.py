@@ -8,6 +8,8 @@ from actions_node.default_actions.WaitUntilPercentCompletedTrajectoryAction impo
 from actions_node.game_specific_actions.AutomatedActions import *
 from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection, RobotDirection
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
+from actions_node.game_specific_actions.LaunchAction import LaunchAction
+
 
 from ck_ros_msgs_node.msg import Arm_Goal
 
@@ -24,11 +26,13 @@ class ConeWall2MidClimb(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
+            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT),
             StopIntakeAction(False),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
+                    MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK),
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.4),
                     MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.8),
@@ -40,8 +44,7 @@ class ConeWall2MidClimb(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             ]),
-            MoveArmAction(Arm_Goal.MID_CUBE, Arm_Goal.SIDE_FRONT),
-            OuttakeAction(False, 0.2),
+            LaunchAction(False, 1, 0.2),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),

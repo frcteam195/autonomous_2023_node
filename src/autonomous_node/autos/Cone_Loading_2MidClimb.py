@@ -37,15 +37,17 @@ class ConeLoading2MidClimb(AutoBase):
                 ])
             ]),
             ParallelAction([
-                StopIntakeAction(False),
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.95),
-                    LaunchAction(False, 0.2)
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.25),
+                    StopIntakeAction(False),
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.90),
+                    LaunchAction(False)
                 ])
             ]),
             ParallelAction([
+                StopIntakeAction(False),
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT)
             ]),
