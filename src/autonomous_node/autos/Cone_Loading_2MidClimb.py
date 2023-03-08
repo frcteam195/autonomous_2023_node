@@ -25,6 +25,7 @@ class ConeLoading2MidClimb(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
+            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT),
             StopIntakeAction(False),
             ParallelAction([
