@@ -8,6 +8,7 @@ from actions_node.default_actions.WaitUntilPercentCompletedTrajectoryAction impo
 from actions_node.game_specific_actions.AutomatedActions import *
 from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection, RobotDirection
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
+from actions_node.game_specific_actions.LaunchAction import LaunchAction
 
 from ck_ros_msgs_node.msg import Arm_Goal
 
@@ -39,7 +40,7 @@ class ConeLoading2MidClimb(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             ]),
-            OuttakeAction(False, 0.8),
+            LaunchAction(pinched=False, time_to_outtake_s=0.5),
             MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
