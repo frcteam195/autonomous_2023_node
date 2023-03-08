@@ -6,59 +6,56 @@ from actions_node.default_actions.ParallelAction import ParallelAction
 
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
 from actions_node.game_specific_actions.AutomatedActions import *
-from actions_node.game_specific_actions.LaunchAction import *
 
 from ck_ros_msgs_node.msg import Arm_Goal
 from actions_node.default_actions.ResetPoseAction import ResetPoseAction
+from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection
 
-class ConeLoadingMidLink(AutoBase):
+class CubeLoadingTwoAndHalfPieceClimb(AutoBase):
     """
     Score two game pieces on the loading side.
     """
     def __init__(self) -> None:
-        super().__init__(display_name="MidLink",
-                         game_piece=GamePiece.Cone,
+        super().__init__(display_name="TwoAndHalfPieceClimb",
+                         game_piece=GamePiece.Cube,
                          start_position=StartPosition.Loading,
                          expected_trajectory_count=4)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
-            ScoreConeMiddle(Arm_Goal.SIDE_FRONT),
-
+            MoveArmAction(Arm_Goal.LOW_SCORE, Arm_Goal.SIDE_BACK),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
+                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.65),
-                    MoveArmAction(Arm_Goal.GROUND_DEAD_CONE, Arm_Goal.SIDE_BACK),
-                ]),
-            ]),
-
-            IntakeAction(True, 0.25),
-
-            StopIntakeAction(True),
-            ParallelAction([
-                self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
-            ]),
-
-            ScoreConeMiddle(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
-            ParallelAction([
-                self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
-                SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.5),
                     IntakeAction(False)
                 ])
             ]),
-            StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT)
+                StopIntakeAction(False),
+                MoveArmAction(Arm_Goal.LOW_SCORE, Arm_Goal.SIDE_BACK),
             ]),
-            LaunchAction(False, 0.5, 1),
-            #ScoreCubeMiddle(Arm_Goal.SIDE_FRONT),
-            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
-        ])
+            OuttakeAction(False, 0.1),
+            StopIntakeAction(False),
+            ParallelAction([
+                self.trajectory_iterator.get_next_trajectory_action(),
+                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT),
+                SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
+                    IntakeAction(False)
+            ]),
+            ]),
+            ParallelAction([
+                self.trajectory_iterator.get_next_trajectory_action(),
+                SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.15),
+                    MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT)
+                ])
+            ]),
+            AutoBalanceAction(BalanceDirection.ROLL, 90.0)
+        ]) 
+
+    
