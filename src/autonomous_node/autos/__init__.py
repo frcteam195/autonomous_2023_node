@@ -7,9 +7,11 @@ from autonomous_node.autos.ConeLoadingThreePiece import ConeLoadingThreePiece
 from autonomous_node.autos.ConeLoadingThreePieceClimbTest import ConeLoadingThreePieceClimbTest
 from autonomous_node.autos.ConeLoadingThreePieceMidLink import ConeLoadingThreePieceMidLink
 from autonomous_node.autos.Cone_Loading_TwoPieceClimb import ConeLoadingTwoPieceClimb
+from autonomous_node.autos.Cone_Loading_2MidClimb import ConeLoading2MidClimb
 from autonomous_node.autos.Cube_Bump_FiveScore import Cube_Bump_FiveScore
 from autonomous_node.autos.CubeLoadingThreePieceMidLink import CubeLoadingThreePieceMidLink
 from autonomous_node.autos.CubeWallThreePiece import CubeWallThreePiece
+from autonomous_node.autos.Cone_Wall_2MidClimb import ConeWall2MidClimb
 from autonomous_node.autos.Cone_Loading_MidLink import ConeLoadingMidLink
 
 class AutonomousNames(str, Enum):
@@ -23,9 +25,12 @@ class AutonomousNames(str, Enum):
     ConeLoadingThreePieceClimbTest = "Cone_Loading_ThreePieceClimb_Test"
     ConeLoadingThreePieceMidLink = "Cone_Loading_ThreePieceMidLink"
     ConeLoadingTwoPieceClimb = "Cone_Loading_TwoPieceClimb"
+    ConeLoading2MidClimb = "Cone_Loading_2MidClimb"
+    CubeWallThreePiece = "Cube_Wall_ThreePiece"
+    ConeWall2MidClimb = "Cone_Wall_2MidClimb"
+
     #Cube_Bump_FiveScore = "Cube_Bump_FiveScore"
     CubeLoadingThreePieceMidLink = "Cube_Loading_ThreePieceMidLink"
-    CubeWallThreePiece = "Cube_Wall_ThreePiece"
     ConeLoadingMidLink ="Cone_Loading_MidLink"
 
     def __str__(self) -> str:
@@ -43,9 +48,11 @@ def init_auto_selection_map():
         AutonomousNames.ConeLoadingThreePieceClimbTest: ConeLoadingThreePieceClimbTest(),
         AutonomousNames.ConeLoadingThreePieceMidLink: ConeLoadingThreePieceMidLink(),
         AutonomousNames.ConeLoadingTwoPieceClimb: ConeLoadingTwoPieceClimb(),
+        AutonomousNames.ConeLoading2MidClimb: ConeLoading2MidClimb(),
         #AutonomousNames.Cube_Bump_FiveScore: Cube_Bump_FiveScore(),
         AutonomousNames.CubeLoadingThreePieceMidLink: CubeLoadingThreePieceMidLink(),
         AutonomousNames.CubeWallThreePiece: CubeWallThreePiece(),
+        AutonomousNames.ConeWall2MidClimb: ConeWall2MidClimb(),
         AutonomousNames.ConeLoadingMidLink: ConeLoadingMidLink()
 
 
