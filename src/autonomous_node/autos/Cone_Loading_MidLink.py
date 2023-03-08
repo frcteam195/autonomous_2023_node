@@ -31,17 +31,16 @@ class ConeLoadingMidLink(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
                     MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.65),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.35),
+                    IntakeAction(True),
                     MoveArmAction(Arm_Goal.GROUND_DEAD_CONE, Arm_Goal.SIDE_BACK),
                 ]),
             ]),
 
-            IntakeAction(True, 0.25),
-
-            StopIntakeAction(True),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
+                StopIntakeAction(True),
+                MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             ]),
 
             ScoreConeMiddle(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
@@ -53,8 +52,9 @@ class ConeLoadingMidLink(AutoBase):
                     IntakeAction(False)
                 ])
             ]),
-            StopIntakeAction(True),
+            
             ParallelAction([
+                StopIntakeAction(True),
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT)
             ]),
