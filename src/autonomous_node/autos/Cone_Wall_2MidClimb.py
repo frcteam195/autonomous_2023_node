@@ -21,7 +21,7 @@ class ConeWall2MidClimb(AutoBase):
         super().__init__(display_name="2MidClimb",
                          game_piece=GamePiece.Cone,
                          start_position=StartPosition.Wall,
-                         expected_trajectory_count=3)
+                         expected_trajectory_count=5)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
@@ -31,20 +31,27 @@ class ConeWall2MidClimb(AutoBase):
             StopIntakeAction(False),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
+                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK)
+            ]),
+            self.trajectory_iterator.get_next_trajectory_action(),
+            ParallelAction([
+                self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK),
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.4),
                     MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.8),
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
                     IntakeAction(False)
                 ])
             ]),
-            StopIntakeAction(False),
-            ParallelAction([
+            ParallelAction([            
+                StopIntakeAction(False),
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
+                SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.4),
+                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.95),   
+                    LaunchAction(False, 1, 0.2),
+                ])
             ]),
-            LaunchAction(False, 1, 0.2),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
