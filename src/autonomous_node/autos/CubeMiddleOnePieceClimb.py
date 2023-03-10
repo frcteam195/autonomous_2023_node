@@ -1,41 +1,36 @@
 from autonomous_node.autos.AutoBase import AutoBase, GamePiece, StartPosition
 
+from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 from actions_node.default_actions.SeriesAction import SeriesAction
 from actions_node.default_actions.ParallelAction import ParallelAction
 from actions_node.default_actions.WaitUntilPercentCompletedTrajectoryAction import WaitUntilPercentCompletedTrajectoryAction
-from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 
-
-from actions_node.game_specific_actions.IntakeAction import IntakeAction
 from actions_node.game_specific_actions.AutomatedActions import *
+from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection, RobotDirection
+from actions_node.game_specific_actions.IntakeAction import IntakeAction
+from actions_node.game_specific_actions.LaunchAction import LaunchAction
 
 from ck_ros_msgs_node.msg import Arm_Goal
 
 class CubeMiddleOnePieceClimb(AutoBase):
     """
-    Score two game pieces on the loading side.
+    Scores one in Cube Node and climbs
     """
     def __init__(self) -> None:
-        super().__init__(display_name="OnePieceClimb",
-                         game_piece=GamePiece.Cube,
-                         start_position=StartPosition.Middle,
-                         expected_trajectory_count=2)
+        super().__init__(display_name="2MidClimb",
+                         game_piece=GamePiece.Cone,
+                         start_position=StartPosition.Loading,
+                         expected_trajectory_count=3)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            ScoreCubeHigh(Arm_Goal.SIDE_BACK),
+            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
+            MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT),
+            StopIntakeAction(False),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CONE, Arm_Goal.SIDE_FRONT),
-                # SeriesAction([
-                #     WaitUntilPercentCompletedTrajectoryAction(0, 0.75),
-                #     IntakeAction(True),
-                # ])
+                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT)
             ]),
-            ParallelAction([
-                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
-                self.trajectory_iterator.get_next_trajectory_action(),
-                StopIntakeAction(True)
-            ]),
+            AutoBalanceAction(BalanceDirection.ROLL, 90.0)
         ])
