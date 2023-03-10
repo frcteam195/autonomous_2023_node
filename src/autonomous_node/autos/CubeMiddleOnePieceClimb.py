@@ -27,11 +27,9 @@ class CubeMiddleOnePieceClimb(AutoBase):
             ResetPoseAction(self.get_unique_name()),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT),
-            OuttakeAction(False, 0.2),
+            LaunchAction(False, 1, 1),
             StopIntakeAction(False),
-            ParallelAction([
-                self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT)
-            ]),
+            MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
+            self.trajectory_iterator.get_next_trajectory_action(),
             AutoBalanceAction(BalanceDirection.ROLL, 90.0)
         ])
