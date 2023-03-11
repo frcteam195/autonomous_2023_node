@@ -62,7 +62,7 @@ class ConeLoadingMidLink(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT)
             ]),
-            LaunchAction(False, 1, 0.5),
+            LaunchAction(True, 1, 0.5),
             #ScoreCubeMiddle(Arm_Goal.SIDE_FRONT),
             #MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
         ])
