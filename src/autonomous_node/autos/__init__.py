@@ -61,6 +61,5 @@ def init_auto_selection_map():
         AutonomousNames.CubeLoadingTwoAndHalfPieceClimb: CubeLoadingTwoAndHalfPieceClimb(),
         AutonomousNames.ConeWallTwoHigh: ConeWallTwoHigh(),
         AutonomousNames.CubeMiddleOnePieceClimb: CubeMiddleOnePieceClimb(),
-        AutonomousNames.ConeMiddleOnePieceClimb: ConeMiddleOnePieceClimb(),
-        AutonomousNames.CubeMiddleOnePieceClimb: CubeMiddleOnePieceClimb()
+        AutonomousNames.ConeMiddleOnePieceClimb: ConeMiddleOnePieceClimb()
     }
