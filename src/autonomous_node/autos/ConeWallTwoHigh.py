@@ -27,7 +27,7 @@ class ConeWallTwoHigh(AutoBase):
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
-            MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT),
+            MoveArmAction(Arm_Goal.HIGH_CONE, Arm_Goal.SIDE_FRONT),
             StopIntakeAction(False),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
@@ -49,7 +49,8 @@ class ConeWallTwoHigh(AutoBase):
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.4),
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.95),   
-                    ScoreCubeHigh(Arm_Goal.SIDE_FRONT),
+                    MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT),
+                    LaunchAction(False, 1, 0.2)
                 ])
             ]),
             MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
