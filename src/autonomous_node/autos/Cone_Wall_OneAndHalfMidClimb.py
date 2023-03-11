@@ -13,15 +13,15 @@ from actions_node.game_specific_actions.LaunchAction import LaunchAction
 
 from ck_ros_msgs_node.msg import Arm_Goal
 
-class ConeWall2MidClimb(AutoBase):
+class ConeWallOneAndHalfMidClimb(AutoBase):
     """
     Score two game pieces on the loading side.
     """
     def __init__(self) -> None:
-        super().__init__(display_name="2MidClimb",
+        super().__init__(display_name="OneAndHalfMidClimb",
                          game_piece=GamePiece.Cone,
                          start_position=StartPosition.Wall,
-                         expected_trajectory_count=5)
+                         expected_trajectory_count=4)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
@@ -42,19 +42,10 @@ class ConeWall2MidClimb(AutoBase):
                     IntakeAction(False)
                 ])
             ]),
-            ParallelAction([            
-                StopIntakeAction(False),
-                self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(3, 0.4),
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
-                    WaitUntilPercentCompletedTrajectoryAction(3, 0.95),   
-                    LaunchAction(False, 1, 0.2),
-                ])
-            ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
+                StopIntakeAction(False),
+                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT)
             ]),
             AutoBalanceAction(BalanceDirection.ROLL, 270)
         ])
