@@ -14,6 +14,7 @@ from autonomous_node.autos.Cone_Wall_OneAndHalfMidClimb import ConeWallOneAndHal
 from autonomous_node.autos.Cone_Loading_MidLink import ConeLoadingMidLink
 from autonomous_node.autos.Cube_Loading_TwoAndHalfPieceClimb import CubeLoadingTwoAndHalfPieceClimb
 from autonomous_node.autos.ConeWallTwoHigh import ConeWallTwoHigh
+from autonomous_node.autos.CubeWallTwoHigh import CubeWallTwoHigh
 from autonomous_node.autos.CubeMiddleOnePieceClimb import CubeMiddleOnePieceClimb
 from autonomous_node.autos.ConeMiddleOnePieceClimb import ConeMiddleOnePieceClimb
 class AutonomousNames(str, Enum):
@@ -34,6 +35,7 @@ class AutonomousNames(str, Enum):
     CubeLoadingThreePieceMidLink = "Cube_Loading_ThreePieceMidLink"
     ConeLoadingMidLink ="Cone_Loading_MidLink"
     ConeWallTwoHigh = "Cone_Wall_TwoHigh"
+    CubeWallTwoHigh = "Cube_Wall_TwoHigh"
     CubeMiddleOnePieceClimb = "Cube_Middle_OnePieceClimb"
     ConeMiddleOnePieceClimb = "Cone_Middle_OnePieceClimb"
 
@@ -60,6 +62,7 @@ def init_auto_selection_map():
         AutonomousNames.ConeLoadingMidLink: ConeLoadingMidLink(),
         AutonomousNames.CubeLoadingTwoAndHalfPieceClimb: CubeLoadingTwoAndHalfPieceClimb(),
         AutonomousNames.ConeWallTwoHigh: ConeWallTwoHigh(),
+        AutonomousNames.CubeWallTwoHigh: CubeWallTwoHigh(),
         AutonomousNames.CubeMiddleOnePieceClimb: CubeMiddleOnePieceClimb(),
         AutonomousNames.ConeMiddleOnePieceClimb: ConeMiddleOnePieceClimb()
     }
