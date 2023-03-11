@@ -34,7 +34,7 @@ class ConeWallOnePiece(AutoBase):
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK)
+                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT)
             ]),
             AutoBalanceAction(BalanceDirection.ROLL, 270.0),   
             StopIntakeAction(False)
