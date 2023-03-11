@@ -17,7 +17,6 @@ from autonomous_node.autos.ConeWallTwoHigh import ConeWallTwoHigh
 from autonomous_node.autos.ConeWallOnePiece import ConeWallOnePiece
 from autonomous_node.autos.CubeMiddleOnePieceClimb import CubeMiddleOnePieceClimb
 from autonomous_node.autos.ConeMiddleOnePieceClimb import ConeMiddleOnePieceClimb
-
 class AutonomousNames(str, Enum):
     """
     Format must be PRELOAD_STARTINGPOSITION_ANYNAMENOTINCLUDINGAKEYWORDFORPRELOADORSTARTINGPOSITION
