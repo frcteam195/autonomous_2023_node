@@ -37,6 +37,7 @@ class AutonomousNames(str, Enum):
     ConeWallTwoHigh = "Cone_Wall_TwoHigh"
     CubeMiddleOnePieceClimb = "Cube_Middle_OnePieceClimb"
     ConeMiddleOnePieceClimb = "Cone_Middle_OnePieceClimb"
+    ConeWallOnePiece = "Cone_Wall_OnePiece"
 
     def __str__(self) -> str:
         return str.__str__(self)
