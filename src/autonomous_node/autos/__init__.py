@@ -14,11 +14,9 @@ from autonomous_node.autos.Cone_Wall_2MidClimb import ConeWall2MidClimb
 from autonomous_node.autos.Cone_Loading_MidLink import ConeLoadingMidLink
 from autonomous_node.autos.Cube_Loading_TwoAndHalfPieceClimb import CubeLoadingTwoAndHalfPieceClimb
 from autonomous_node.autos.ConeWallTwoHigh import ConeWallTwoHigh
-<<<<<<< HEAD
 from autonomous_node.autos.ConeWallOnePiece import ConeWallOnePiece
-=======
 from autonomous_node.autos.CubeMiddleOnePieceClimb import CubeMiddleOnePieceClimb
->>>>>>> 26b1f4f29d73e1b8678c575b1ddd917865707000
+
 
 class AutonomousNames(str, Enum):
     """
