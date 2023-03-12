@@ -30,9 +30,9 @@ class ConeLoadingMidLink(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACk),
+                    MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK),
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.80),
-                    IntakeAction(False, 0.15),
+                    IntakeAction(False),
                     MoveArmAction(Arm_Goal.GROUND_DEAD_CONE, Arm_Goal.SIDE_BACK),
                 ]),
             ]),
@@ -54,7 +54,7 @@ class ConeLoadingMidLink(AutoBase):
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
-                    IntakeAction(False, 0.15)
+                    IntakeAction(False)
                 ])
             ]),
 
