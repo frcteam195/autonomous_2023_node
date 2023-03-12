@@ -32,7 +32,7 @@ class ConeLoadingMidLink(AutoBase):
                 SeriesAction([
                     MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACk),
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.80),
-                    IntakeAction(False),
+                    IntakeAction(False, 0.15),
                     MoveArmAction(Arm_Goal.GROUND_DEAD_CONE, Arm_Goal.SIDE_BACK),
                 ]),
             ]),
@@ -54,7 +54,7 @@ class ConeLoadingMidLink(AutoBase):
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
-                    IntakeAction(False)
+                    IntakeAction(False, 0.15)
                 ])
             ]),
 
