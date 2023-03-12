@@ -27,7 +27,7 @@ class ConeLoading2MidClimb(AutoBase):
             ResetPoseAction(self.get_unique_name()),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT),
-            StopIntakeAction(False),
+            StopIntakeAction(False, 0.15),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
