@@ -17,6 +17,9 @@ from autonomous_node.autos.ConeWallTwoHigh import ConeWallTwoHigh
 from autonomous_node.autos.CubeWallTwoHigh import CubeWallTwoHigh
 from autonomous_node.autos.CubeMiddleOnePieceClimb import CubeMiddleOnePieceClimb
 from autonomous_node.autos.ConeMiddleOnePieceClimb import ConeMiddleOnePieceClimb
+from autonomous_node.autos.StraightLine import StraightLine
+from autonomous_node.autos.Curve import Curve
+
 class AutonomousNames(str, Enum):
     """
     Format must be PRELOAD_STARTINGPOSITION_ANYNAMENOTINCLUDINGAKEYWORDFORPRELOADORSTARTINGPOSITION
@@ -38,6 +41,8 @@ class AutonomousNames(str, Enum):
     CubeWallTwoHigh = "Cube_Wall_TwoHigh"
     CubeMiddleOnePieceClimb = "Cube_Middle_OnePieceClimb"
     ConeMiddleOnePieceClimb = "Cone_Middle_OnePieceClimb"
+    StraightLine = "Test_Test_StraightLine"
+    Curve = "Test_Test_Curve"
 
 
     def __str__(self) -> str:
@@ -64,5 +69,7 @@ def init_auto_selection_map():
         AutonomousNames.ConeWallTwoHigh: ConeWallTwoHigh(),
         AutonomousNames.CubeWallTwoHigh: CubeWallTwoHigh(),
         AutonomousNames.CubeMiddleOnePieceClimb: CubeMiddleOnePieceClimb(),
-        AutonomousNames.ConeMiddleOnePieceClimb: ConeMiddleOnePieceClimb()
+        AutonomousNames.ConeMiddleOnePieceClimb: ConeMiddleOnePieceClimb(),
+        AutonomousNames.StraightLine: StraightLine(),
+        AutonomousNames.Curve: Curve()
     }
