@@ -23,7 +23,6 @@ class ConeLoadingThreePieceMidLink(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            #StopIntakeAction(True),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_BACK),
             ScoreConeMiddle(Arm_Goal.SIDE_BACK),
             ParallelAction([
