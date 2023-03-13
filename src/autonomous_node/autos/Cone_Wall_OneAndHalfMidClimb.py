@@ -35,8 +35,8 @@ class ConeWallOneAndHalfMidClimb(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.GROUND_DEAD_CONE, Arm_Goal.SIDE_BACK),
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.90),
+                    MoveArmAction(Arm_Goal.GROUND_DEAD_CONE, Arm_Goal.SIDE_BACK),
                     IntakeAction(True)
                 ])
             ]),
@@ -45,7 +45,7 @@ class ConeWallOneAndHalfMidClimb(AutoBase):
                 MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
                 WaitUntilPercentCompletedTrajectoryAction(3, 0.5),
-                StopIntakeAction(False)
+                StopIntakeAction(True)
 
                 ])
             ]),
