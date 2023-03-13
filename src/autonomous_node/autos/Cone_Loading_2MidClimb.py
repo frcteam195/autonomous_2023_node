@@ -31,7 +31,7 @@ class ConeLoading2MidClimb(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.95),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.97),
                     IntakeAction(False)
                 ])
             ]),
@@ -39,7 +39,7 @@ class ConeLoading2MidClimb(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.20),
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.40),
                     StopIntakeAction(False),
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.90),
                     LaunchAction(False)
