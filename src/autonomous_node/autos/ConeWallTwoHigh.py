@@ -7,7 +7,7 @@ from actions_node.default_actions.WaitUntilPercentCompletedTrajectoryAction impo
 from actions_node.default_actions.WaitAction import WaitAction
 
 from actions_node.game_specific_actions.AutomatedActions import *
-from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection, RobotDirection
+from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
 from actions_node.game_specific_actions.LaunchAction import LaunchAction
 

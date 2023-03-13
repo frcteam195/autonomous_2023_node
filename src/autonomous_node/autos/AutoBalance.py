@@ -4,7 +4,7 @@ from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 from actions_node.default_actions.SeriesAction import SeriesAction
 
 from actions_node.game_specific_actions.AutomatedActions import *
-from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection, RobotDirection
+from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection
 
 class AutoBalance(AutoBase):
     """

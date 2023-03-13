@@ -6,7 +6,7 @@ from actions_node.default_actions.ParallelAction import ParallelAction
 from actions_node.default_actions.WaitUntilPercentCompletedTrajectoryAction import WaitUntilPercentCompletedTrajectoryAction
 
 from actions_node.game_specific_actions.AutomatedActions import *
-from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection, RobotDirection
+from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
 
 from ck_ros_msgs_node.msg import Arm_Goal
