@@ -26,26 +26,28 @@ class ConeWallOneAndHalfMidClimb(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
-            MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT),
-            StopIntakeAction(False),
+            ScoreConeMiddle(Arm_Goal.SIDE_FRONT),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK)
+                MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK)
             ]),
             self.trajectory_iterator.get_next_trajectory_action(),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
-                    IntakeAction(False)
+                    MoveArmAction(Arm_Goal.GROUND_DEAD_CONE, Arm_Goal.SIDE_BACK),
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.90),
+                    IntakeAction(True)
                 ])
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                StopIntakeAction(False),
-                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT)
+                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
+                SeriesAction([
+                WaitUntilPercentCompletedTrajectoryAction(3, 0.5),
+                StopIntakeAction(False)
+
+                ])
             ]),
             AutoBalanceAction(BalanceDirection.ROLL, 270)
         ])
