@@ -24,9 +24,7 @@ class ConeLoadingMidLink(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             ScoreConeMiddle(Arm_Goal.SIDE_FRONT),
-
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
@@ -37,7 +35,6 @@ class ConeLoadingMidLink(AutoBase):
                 ]),
             ]),
             IntakeAction(True, 0.2),
-
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 StopIntakeAction(True),

@@ -27,28 +27,26 @@ class CubeWallTwoHigh(AutoBase):
             ResetPoseAction(self.get_unique_name()),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
-            LaunchAction(False, 0.7, 0.1),
+            LaunchAction(False, 0.85, 0.1),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.90),
-                    MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180)
-                ])
+                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180)
             ]),
+            MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
             self.trajectory_iterator.get_next_trajectory_action(),
             MoveArmAction(Arm_Goal.GROUND_DEAD_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
-            IntakeAction(False, 0.25),
-            IntakeAction(True, 0.25),
+            IntakeAction(False, 0.30),
+            IntakeAction(True, 0.40),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.1),
+                    MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
                     StopIntakeAction(True),
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO)
                 ])
             ]),
             MoveArmAction(Arm_Goal.HIGH_CONE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
-            StopIntakeAction(False, 0.25),
+            StopIntakeAction(False, 0.15),
             MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO)
         ])
