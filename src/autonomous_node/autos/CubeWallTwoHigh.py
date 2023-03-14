@@ -34,9 +34,7 @@ class CubeWallTwoHigh(AutoBase):
             ]),
             MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
             self.trajectory_iterator.get_next_trajectory_action(),
-            MoveArmAction(Arm_Goal.GROUND_DEAD_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
-            IntakeAction(False, 0.30),
-            IntakeAction(True, 0.40),
+            IntakeDeadCone(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([

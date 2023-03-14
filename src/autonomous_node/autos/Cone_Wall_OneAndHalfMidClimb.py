@@ -26,27 +26,19 @@ class ConeWallOneAndHalfMidClimb(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            ScoreConeMiddle(Arm_Goal.SIDE_FRONT),
+            ScoreConeHigh(Arm_Goal.SIDE_FRONT),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK)
             ]),
             self.trajectory_iterator.get_next_trajectory_action(),
+            IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
+                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.90),
-                    MoveArmAction(Arm_Goal.GROUND_DEAD_CONE, Arm_Goal.SIDE_BACK),
-                    IntakeAction(True)
-                ])
-            ]),
-            ParallelAction([
-                self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
-                SeriesAction([
-                WaitUntilPercentCompletedTrajectoryAction(3, 0.5),
-                StopIntakeAction(True)
-
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
+                    StopIntakeAction(True)
                 ])
             ]),
             AutoBalanceAction(BalanceDirection.ROLL, 270)
