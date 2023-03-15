@@ -11,7 +11,7 @@ from actions_node.game_specific_actions.LaunchAction import *
 from ck_ros_msgs_node.msg import Arm_Goal
 from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 
-class ConeLoadingMidLink(AutoBase):
+class Cube_Loading_MidLink(AutoBase):
     """
     Score two game pieces on the loading side.
     """

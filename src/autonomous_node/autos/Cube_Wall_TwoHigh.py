@@ -11,7 +11,7 @@ from actions_node.game_specific_actions.LaunchAction import LaunchAction
 
 from ck_ros_msgs_node.msg import Arm_Goal
 
-class CubeWallTwoHigh(AutoBase):
+class Cube_Wall_TwoHigh(AutoBase):
     """
     Score two game pieces on the wall side.
     """
