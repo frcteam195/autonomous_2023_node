@@ -31,16 +31,16 @@ class Cube_Wall_TwoHigh(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180)
             ]),
-            IntakeDeadCone(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
+            IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_180),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
                     MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.5),
                     StopIntakeAction(True),
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO)
                 ])
             ]),
-            ScoreHighconeAction(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+            ScoreConeHigh(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO)
         ])
