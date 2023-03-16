@@ -29,18 +29,16 @@ class Cube_Loading_MidLink(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
                     MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK),
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.80),
-                    IntakeAction(False),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.70),
                     IntakeDeadCone(Arm_Goal.SIDE_BACK, 0)
                 ]),
             ]),
-            IntakeAction(True, 0.2),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 StopIntakeAction(True),
                 SeriesAction([
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.8),
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.6),
                     MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
                 ])
             ]),
@@ -59,8 +57,12 @@ class Cube_Loading_MidLink(AutoBase):
                 StopIntakeAction(True),
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT),
+                SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.80),
+                    LaunchAction(True, 1, 0.5),
+                ])
+                
             ]),
-            LaunchAction(True, 1, 0.5),
             #ScoreCubeMiddle(Arm_Goal.SIDE_FRONT),
             #MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
         ])
