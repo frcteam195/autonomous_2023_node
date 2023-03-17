@@ -49,7 +49,7 @@ class Cube_Loading_MidLink(AutoBase):
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
-                    IntakeAction(False, -1, 0.65)
+                    IntakeAction(False, -1, 0.2)
                 ])
             ]),
 

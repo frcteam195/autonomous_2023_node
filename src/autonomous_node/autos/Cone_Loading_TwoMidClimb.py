@@ -32,7 +32,7 @@ class Cone_Loading_TwoMidClimb(AutoBase):
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.65),
-                    IntakeAction(False, -1, 0.65)
+                    IntakeAction(False, -1, 0.2)
                 ])
             ]),
             ParallelAction([
