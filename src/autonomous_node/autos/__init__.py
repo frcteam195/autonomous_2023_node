@@ -1,5 +1,6 @@
 from enum import Enum
 
+from autonomous_node.autos.Cone_Loading_TwoHighClimb import Cone_Loading_TwoHighClimb
 from autonomous_node.autos.Cone_Loading_TwoMidClimb import Cone_Loading_TwoMidClimb
 from autonomous_node.autos.Cone_Middle_Climb import Cone_Middle_Climb
 from autonomous_node.autos.Cone_Wall_GatherAndClimb import Cone_Wall_GatherAndClimb
@@ -20,6 +21,7 @@ class AutonomousNames(str, Enum):
     """
     Format must be PRELOAD_STARTINGPOSITION_ANYNAMENOTINCLUDINGAKEYWORDFORPRELOADORSTARTINGPOSITION
     """
+    Cone_Loading_TwoHighClimb = "Cone_Loading_TwoHighClimb"
     Cone_Loading_TwoMidClimb = "Cone_Loading_TwoMidClimb"
     Cone_Middle_Climb = "Cone_Middle_Climb"
     Cone_Wall_GatherAndClimb = "Cone_Wall_GatherAndClimb"
@@ -47,6 +49,7 @@ def init_auto_selection_map():
     Returns an autonomous selection map, mapping auto names to auto programs.
     """
     return {
+        AutonomousNames.Cone_Loading_TwoHighClimb: Cone_Loading_TwoHighClimb(),
         AutonomousNames.Cone_Loading_TwoMidClimb: Cone_Loading_TwoMidClimb(),
         AutonomousNames.Cube_Middle_Climb: Cube_Middle_Climb(),
         AutonomousNames.Cone_Wall_GatherAndClimb: Cone_Wall_GatherAndClimb(),
