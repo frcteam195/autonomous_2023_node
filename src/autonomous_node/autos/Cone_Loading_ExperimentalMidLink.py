@@ -3,6 +3,7 @@ from autonomous_node.autos.AutoBase import AutoBase, GamePiece, StartPosition
 
 from actions_node.default_actions.SeriesAction import SeriesAction
 from actions_node.default_actions.ParallelAction import ParallelAction
+from actions_node.default_actions.WaitAction import WaitAction
 
 from actions_node.game_specific_actions.IntakeAction import IntakeAction
 from actions_node.game_specific_actions.AutomatedActions import *
@@ -19,7 +20,7 @@ class Cube_Loading_ExperimentalMidLink(AutoBase):
         super().__init__(display_name="ExperimentalMidLink",
                          game_piece=GamePiece.Cone,
                          start_position=StartPosition.Loading,
-                         expected_trajectory_count=1)
+                         expected_trajectory_count=2)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
@@ -49,6 +50,6 @@ class Cube_Loading_ExperimentalMidLink(AutoBase):
   #                  LaunchAction(True, 1, 0.5),
    #             ]),
             ]),
-
+        WaitAction(1),
         self.trajectory_iterator.get_next_trajectory_action(),
         ])
