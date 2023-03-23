@@ -21,7 +21,7 @@ class ConeWallOneAndHalfClimb(AutoBase):
         super().__init__(display_name="OneAndHalfClimb",
                          game_piece=GamePiece.Cone,
                          start_position=StartPosition.Wall,
-                         expected_trajectory_count=23)
+                         expected_trajectory_count=2)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
