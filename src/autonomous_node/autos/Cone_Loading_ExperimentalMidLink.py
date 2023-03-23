@@ -49,5 +49,6 @@ class Cube_Loading_ExperimentalMidLink(AutoBase):
   #                  LaunchAction(True, 1, 0.5),
    #             ]),
             ]),
-        
+
+        self.trajectory_iterator.get_next_trajectory_action(),
         ])
