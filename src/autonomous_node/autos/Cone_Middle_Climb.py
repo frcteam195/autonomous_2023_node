@@ -20,7 +20,7 @@ class Cone_Middle_Climb(AutoBase):
         super().__init__(display_name="Climb",
                          game_piece=GamePiece.Cone,
                          start_position=StartPosition.Middle,
-                         expected_trajectory_count=1)
+                         expected_trajectory_count=3)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
