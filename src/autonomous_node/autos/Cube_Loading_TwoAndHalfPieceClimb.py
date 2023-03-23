@@ -14,7 +14,7 @@ from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection
 
 
-class CubeLoadingTwoAndHalfPieceClimb(AutoBase):
+class Cube_Loading_TwoAndHalfPieceClimb(AutoBase):
     """
     Score two game pieces on the loading side.
     """
