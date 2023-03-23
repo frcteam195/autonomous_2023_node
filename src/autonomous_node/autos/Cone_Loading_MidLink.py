@@ -11,7 +11,7 @@ from actions_node.game_specific_actions.LaunchAction import *
 from ck_ros_msgs_node.msg import Arm_Goal
 from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 
-class ConeLoadingMidLink(AutoBase):
+class Cube_Loading_MidLink(AutoBase):
     """
     Score two game pieces on the loading side.
     """
@@ -29,18 +29,16 @@ class ConeLoadingMidLink(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
                     MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK),
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.80),
-                    IntakeAction(False),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.70),
                     IntakeDeadCone(Arm_Goal.SIDE_BACK, 0)
                 ]),
             ]),
-            IntakeAction(True, 0.2),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 StopIntakeAction(True),
                 SeriesAction([
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.8),
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.6),
                     MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
                 ])
             ]),
@@ -51,7 +49,7 @@ class ConeLoadingMidLink(AutoBase):
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
-                    IntakeAction(False)
+                    IntakeAction(False, -1, 0.2)
                 ])
             ]),
 
@@ -59,8 +57,9 @@ class ConeLoadingMidLink(AutoBase):
                 StopIntakeAction(True),
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT),
-            ]),
-            LaunchAction(True, 1, 0.5),
-            #ScoreCubeMiddle(Arm_Goal.SIDE_FRONT),
-            #MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
+                SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.80),
+                    LaunchAction(True, 1, 0.5),
+                ])  
+            ])
         ])
