@@ -13,12 +13,12 @@ from actions_node.game_specific_actions.MoveArmAction import MoveArmAction
 
 from ck_ros_msgs_node.msg import Arm_Goal
 
-class Cone_Loading_TwoMidClimb(AutoBase):
+class Cone_Loading_TwoHighClimb(AutoBase):
     """
     Score two game pieces on the loading side.
     """
     def __init__(self) -> None:
-        super().__init__(display_name="TwoMidClimb",
+        super().__init__(display_name="TwoHighClimb",
                          game_piece=GamePiece.Cone,
                          start_position=StartPosition.Loading,
                          expected_trajectory_count=3)
@@ -26,23 +26,23 @@ class Cone_Loading_TwoMidClimb(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            ScoreConeMiddle(Arm_Goal.SIDE_FRONT),
+            ScoreConeHigh(Arm_Goal.SIDE_FRONT),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.65),
-                    IntakeAction(False, -1, 0.2)
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.85),
+                    IntakeAction(False, 0.5, 0.2)
                 ])
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.40),
+                    MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.30),
                     StopIntakeAction(False),
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.90),
-                    LaunchAction(False, 0.2)
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.80),
+                    LaunchAction(False, 0.2, 0.1),
                 ])
             ]),
             ParallelAction([

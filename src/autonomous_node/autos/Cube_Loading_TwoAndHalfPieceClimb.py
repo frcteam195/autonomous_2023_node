@@ -14,7 +14,7 @@ from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection
 
 
-class CubeLoadingTwoAndHalfPieceClimb(AutoBase):
+class Cube_Loading_TwoAndHalfPieceClimb(AutoBase):
     """
     Score two game pieces on the loading side.
     """
@@ -23,7 +23,7 @@ class CubeLoadingTwoAndHalfPieceClimb(AutoBase):
         super().__init__(display_name="TwoAndHalfPieceClimb",
                          game_piece=GamePiece.Cube,
                          start_position=StartPosition.Loading,
-                         expected_trajectory_count=4)
+                         expected_trajectory_count=3)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
@@ -35,7 +35,7 @@ class CubeLoadingTwoAndHalfPieceClimb(AutoBase):
                     OuttakeAction(False, 0.2),
                     MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.75),
-                    IntakeAction(False)
+                    IntakeAction(False, 0.5, 0.2)
                 ])
             ]),
             ParallelAction([
@@ -45,25 +45,20 @@ class CubeLoadingTwoAndHalfPieceClimb(AutoBase):
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.1),
                     StopIntakeAction(False),
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.95),
-                    LaunchAction(False)
+                    LaunchAction(False, 1.0, 0.2)
                 ])
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
-                    StopIntakeAction(False),
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.75),
-                    IntakeAction(False)
-                ])
-            ]),
-            ParallelAction([
-                self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(3, 0.20),
-                    StopIntakeAction(False)
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.55),
+                    IntakeAction(False, 0.5, 0.2),
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.65),
+                    MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO, 5, 5)
                 ]),
-                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO, 5, 5)
+
             ]),
+            
             AutoBalanceAction(BalanceDirection.ROLL, 270.0)
         ])
