@@ -56,7 +56,6 @@ class Cube_Loading_TwoAndHalfPieceClimb(AutoBase):
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.45),
                     IntakeAction(False, 0.5, 0.2),
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.55),
-                    StopIntakeAction(False),
                     MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO, 5, 5)
                 ]),
 
