@@ -8,7 +8,7 @@ from autonomous_node.autos.Cone_Loading_MidLink import Cube_Loading_MidLink
 from autonomous_node.autos.Cone_Loading_ExperimentalMidLink import Cube_Loading_ExperimentalMidLink
 from autonomous_node.autos.Cube_Middle_Climb import Cube_Middle_Climb
 from autonomous_node.autos.Cube_Wall_TwoHigh import Cube_Wall_TwoHigh
-from autonomous_node.autos.Cube_Bump_TwoAndHalfClimb import Cube_Bump_TwoAndHalfClimb
+from autonomous_node.autos.Cube_Bump_Whack import Cube_Bump_Whack
 from autonomous_node.autos.Cube_Loading_TwoAndHalfPieceClimb import Cube_Loading_TwoAndHalfPieceClimb
 
 # Incomplete Autos
@@ -27,12 +27,12 @@ class AutonomousNames(str, Enum):
     Cone_Loading_TwoHighClimb = "Cone_Loading_TwoHighClimb"
     Cone_Loading_TwoMidClimb = "Cone_Loading_TwoMidClimb"
     Cone_Middle_Climb = "Cone_Middle_Climb"
-    Cone_Wall_GatherAndClimb = "Cone_Wall_GatherAndClimb"
+    # Cone_Wall_GatherAndClimb = "Cone_Wall_GatherAndClimb"
     Cube_Loading_MidLink = "Cone_Loading_MidLink"
     Cube_Loading_ExperimentalMidLink = "Cone_Loading_ExperimentalMidLink"
     Cube_Middle_Climb = "Cube_Middle_Climb"
     Cube_Wall_TwoHigh = "Cube_Wall_TwoHigh"
-    Cube_Bump_TwoAndHalfClimb = "Cube_Bump_TwoAndHalfClimb"
+    Cube_Bump_Whack = "Cube_Bump_Whack"
     Cube_Loading_TwoAndHalfPieceClimb = "Cube_Loading_TwoAndHalfPieceClimb"
 
     # Incomplete Autos
@@ -58,12 +58,12 @@ def init_auto_selection_map():
         AutonomousNames.Cone_Loading_TwoHighClimb: Cone_Loading_TwoHighClimb(),
         AutonomousNames.Cone_Loading_TwoMidClimb: Cone_Loading_TwoMidClimb(),
         AutonomousNames.Cube_Middle_Climb: Cube_Middle_Climb(),
-        AutonomousNames.Cone_Wall_GatherAndClimb: Cone_Wall_GatherAndClimb(),
+        # AutonomousNames.Cone_Wall_GatherAndClimb: Cone_Wall_GatherAndClimb(),
         AutonomousNames.Cube_Loading_MidLink: Cube_Loading_MidLink(),
         AutonomousNames.Cube_Loading_ExperimentalMidLink: Cube_Loading_ExperimentalMidLink(),
         AutonomousNames.Cone_Middle_Climb: Cone_Middle_Climb(),
         AutonomousNames.Cube_Wall_TwoHigh: Cube_Wall_TwoHigh(),
-        AutonomousNames.Cube_Bump_TwoAndHalfClimb: Cube_Bump_TwoAndHalfClimb(),
+        AutonomousNames.Cube_Bump_Whack: Cube_Bump_Whack(),
         AutonomousNames.Cube_Loading_TwoAndHalfPieceClimb: Cube_Loading_TwoAndHalfPieceClimb(),
 
         # Incomplete Autos
