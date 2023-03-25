@@ -28,7 +28,7 @@ class Cube_Loading_TwoAndHalfPieceClimb(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.LOW_SCORE, Arm_Goal.SIDE_FRONT),
+            MoveArmAction(Arm_Goal.LOW_CUBE, Arm_Goal.SIDE_FRONT),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
@@ -40,7 +40,7 @@ class Cube_Loading_TwoAndHalfPieceClimb(AutoBase):
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.LOW_SCORE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.LOW_CUBE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.1),
                     StopIntakeAction(False),
@@ -55,7 +55,7 @@ class Cube_Loading_TwoAndHalfPieceClimb(AutoBase):
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.55),
                     IntakeAction(False, 0.5, 0.2),
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.65),
-                    MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO, 5, 5)
+                    MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK, 5, 5)
                 ]),
 
             ]),

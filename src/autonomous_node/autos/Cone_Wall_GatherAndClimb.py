@@ -32,7 +32,7 @@ class Cone_Wall_GatherAndClimb(AutoBase):
                 MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.4),
-                    IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
+                    IntakeDeadCone(Arm_Goal.SIDE_BACK),
                     WaitUntilPercentCompletedTrajectoryAction(0, 0.6),
                     StopIntakeAction(True),
                     MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK)

@@ -27,7 +27,7 @@ class Cone_Middle_Climb(AutoBase):
             ResetPoseAction(self.get_unique_name()),
             StopIntakeAction(True),
             ScoreConeHigh(Arm_Goal.SIDE_FRONT),
-            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
             ParallelAction([
                 MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
                 self.trajectory_iterator.get_next_trajectory_action(),
