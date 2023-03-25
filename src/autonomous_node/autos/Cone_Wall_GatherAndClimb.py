@@ -21,7 +21,7 @@ class Cone_Wall_GatherAndClimb(AutoBase):
         super().__init__(display_name="GatherAndClimb",
                          game_piece=GamePiece.Cone,
                          start_position=StartPosition.Wall,
-                         expected_trajectory_count=2)
+                         expected_trajectory_count=1)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
@@ -29,16 +29,13 @@ class Cone_Wall_GatherAndClimb(AutoBase):
             ScoreConeHigh(Arm_Goal.SIDE_FRONT),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK)
-            ]),
-            IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
-            ParallelAction([
-                self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO, 10, 10),
+                MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK),
                 SeriesAction([
-                    IntakeAction(True),
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.5),
-                    StopIntakeAction(True)
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.4),
+                    IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.6),
+                    StopIntakeAction(True),
+                    MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK)
                 ])
             ]),
             AutoBalanceAction(BalanceDirection.ROLL, 270)
