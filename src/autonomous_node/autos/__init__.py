@@ -10,13 +10,14 @@ from autonomous_node.autos.Cube_Middle_Climb import Cube_Middle_Climb
 from autonomous_node.autos.Cube_Wall_TwoHigh import Cube_Wall_TwoHigh
 from autonomous_node.autos.Cube_Bump_Whack import Cube_Bump_Whack
 from autonomous_node.autos.Cube_Loading_TwoAndHalfPieceClimb import Cube_Loading_TwoAndHalfPieceClimb
+from autonomous_node.autos.Cone_Loading_TwoHighClimbWhack import Cone_Loading_TwoHighClimbWhack
 
 # Incomplete Autos
 # from autonomous_node.autos.Cube_Loading_GatherAndClimb import Cube_Loading_GatherAndClimb
 
 # Test Autos
 # from autonomous_node.autos.AutoBalance import AutoBalance
-# from autonomous_node.autos.Curve import Curve
+from autonomous_node.autos.Curve import Curve
 # from autonomous_node.autos.StraightLine import StraightLine
 
 
@@ -34,13 +35,14 @@ class AutonomousNames(str, Enum):
     Cube_Wall_TwoHigh = "Cube_Wall_TwoHigh"
     Cube_Bump_Whack = "Cube_Bump_Whack"
     Cube_Loading_TwoAndHalfPieceClimb = "Cube_Loading_TwoAndHalfPieceClimb"
+    Cone_Loading_TwoHighClimbWhack = "Cone_loading_TwoHighClimbWhack"
 
     # Incomplete Autos
     # Cube_Loading_GatherAndClimb = "Cube_Loading_GatherAndClimb"
 
     # Test Autos
     # AutoBalance = "Test_Test_AutoBalance"
-    # Curve = "Test_Test_Curve"
+    Curve = "Test_Test_Curve"
     # StraightLine = "Test_Test_StraightLine"
 
     def __str__(self) -> str:
@@ -65,12 +67,13 @@ def init_auto_selection_map():
         AutonomousNames.Cube_Wall_TwoHigh: Cube_Wall_TwoHigh(),
         AutonomousNames.Cube_Bump_Whack: Cube_Bump_Whack(),
         AutonomousNames.Cube_Loading_TwoAndHalfPieceClimb: Cube_Loading_TwoAndHalfPieceClimb(),
+        AutonomousNames.Cone_Loading_TwoHighClimbWhack: Cone_Loading_TwoHighClimbWhack(),
 
         # Incomplete Autos
         # AutonomousNames.Cube_Loading_GatherAndClimb: Cube_Loading_GatherAndClimb(),
 
         # Test Autos
         # AutonomousNames.AutoBalance: AutoBalance(),
-        # AutonomousNames.Curve: Curve(),
+        AutonomousNames.Curve: Curve()
         # AutonomousNames.StraightLine: StraightLine(),
     }
