@@ -40,7 +40,7 @@ class AutonomousNames(str, Enum):
     Cube_Wall_TwoHigh = "Cube_Wall_TwoHigh"
     Cube_Bump_Whack = "Cube_Bump_Whack"
     Cube_Loading_TwoAndHalfPieceClimb = "Cube_Loading_TwoAndHalfPieceClimb"
-    Cone_Loading_TwoHighClimbWhack = "Cone_loading_TwoHighClimbWhack"
+    Cone_Loading_TwoHighClimbWhack = "Cone_Loading_TwoHighClimbWhack"
     Cone_Loading_ThreePiece = "Cone_Loading_ThreePiece"
     Cube_Loading_ThreePieceBumper = "Cube_Loading_ThreePieceBumper"
 
