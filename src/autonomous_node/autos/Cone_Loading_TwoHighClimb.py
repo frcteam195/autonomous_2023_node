@@ -54,5 +54,6 @@ class Cone_Loading_TwoHighClimb(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT)
             ]),
+            WaitAction(0.25),
             AutoBalanceAction(BalanceDirection.ROLL, 90.0)
         ])
