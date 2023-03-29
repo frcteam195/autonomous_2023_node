@@ -26,7 +26,6 @@ class Cube_Wall_TwoHighClimb(AutoBase):
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
-            MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             LaunchAction(False, 0.85, 0.1),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
