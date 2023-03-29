@@ -42,11 +42,12 @@ class Cube_Wall_TwoHighClimb(AutoBase):
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO)
                 ])
             ]),
-            ScoreConeHigh(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+            ScoreConeMiddle(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.2),
                     MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
                 ])
             ]),
