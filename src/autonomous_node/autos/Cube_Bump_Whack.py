@@ -30,6 +30,18 @@ class Cube_Bump_Whack(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
+            ParallelAction([
+                self.trajectory_iterator.get_next_trajectory_action(),
+                SeriesAction([
+                    IntakeAction(False, -1, 0.2),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.50),
+                    MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO, 5, 5)
+                ])
+            ]),
+            StopIntakeAction(False),
+            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+            self.trajectory_iterator.get_next_trajectory_action(),
+            ScoreCubeMiddle(Arm_Goal.SIDE_FRONT),
             MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
             self.trajectory_iterator.get_next_trajectory_action(),
             IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
@@ -40,17 +52,4 @@ class Cube_Bump_Whack(AutoBase):
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             ScoreConeHigh(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
-            ParallelAction([
-                self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    IntakeAction(False, -1, 0.2),
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.50),
-                    MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO, 5, 5)
-                ])
-            ]),
-            StopIntakeAction(False),
-            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
-            self.trajectory_iterator.get_next_trajectory_action(),
-            ScoreCubeMiddle(Arm_Goal.SIDE_FRONT),
-            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO)
         ])
