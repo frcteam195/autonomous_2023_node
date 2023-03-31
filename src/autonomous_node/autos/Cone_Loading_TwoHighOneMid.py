@@ -11,12 +11,12 @@ from actions_node.game_specific_actions.LaunchAction import *
 from ck_ros_msgs_node.msg import Arm_Goal
 from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 
-class Cone_Loading_TwoMidOneHigh(AutoBase):
+class Cone_Loading_TwoHighOneMid(AutoBase):
     """
     Score two game pieces on the loading side.
     """
     def __init__(self) -> None:
-        super().__init__(display_name="TwoMidOneHigh",
+        super().__init__(display_name="TwoHighOneMid",
                          game_piece=GamePiece.Cone,
                          start_position=StartPosition.Loading,
                          expected_trajectory_count=4)

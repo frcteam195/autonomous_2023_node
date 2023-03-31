@@ -15,7 +15,7 @@ from autonomous_node.autos.Cube_Loading_TwoAndHalfPieceClimb import Cube_Loading
 from autonomous_node.autos.Cone_Loading_TwoHighClimbWhack import Cone_Loading_TwoHighClimbWhack
 from autonomous_node.autos.Cone_Loading_ThreePiece import Cone_Loading_ThreePiece
 from autonomous_node.autos.Cube_Loading_ThreePieceBumper import Cube_Loading_ThreePieceBumper
-from autonomous_node.autos.Cone_Loading_TwoMidOneHigh import Cone_Loading_TwoMidOneHigh
+from autonomous_node.autos.Cone_Loading_TwoHighOneMid import Cone_Loading_TwoHighOneMid
 
 # Incomplete Autos
 # from autonomous_node.autos.Cube_Loading_GatherAndClimb import Cube_Loading_GatherAndClimb
@@ -33,31 +33,31 @@ class AutonomousNames(str, Enum):
     Format must be PRELOAD_STARTINGPOSITION_ANYNAMENOTINCLUDINGAKEYWORDFORPRELOADORSTARTINGPOSITION
     """
     Cone_Loading_TwoHighClimb = "Cone_Loading_TwoHighClimb"
-    Cone_Loading_TwoMidClimb = "Cone_Loading_TwoMidClimb"
+    # Cone_Loading_TwoMidClimb = "Cone_Loading_TwoMidClimb"
     Cone_Middle_Climb = "Cone_Middle_Climb"
     # Cone_Wall_GatherAndClimb = "Cone_Wall_GatherAndClimb"
-    Cube_Loading_MidLink = "Cone_Loading_MidLink"
-    Cube_Loading_ExperimentalMidLink = "Cone_Loading_ExperimentalMidLink"
+    #Cube_Loading_MidLink = "Cone_Loading_MidLink"
+    #Cube_Loading_ExperimentalMidLink = "Cone_Loading_ExperimentalMidLink"
     Cube_Middle_Climb = "Cube_Middle_Climb"
     Cube_Wall_TwoHigh = "Cube_Wall_TwoHigh"
-    Cube_Wall_TwoHighAndGather= "Cube_Wall_TwoHighAndGather"
-    Cube_Bump_Whack = "Cube_Bump_Whack"
-    Cube_Loading_TwoAndHalfPieceClimb = "Cube_Loading_TwoAndHalfPieceClimb"
-    Cone_Loading_TwoHighClimbWhack = "Cone_Loading_TwoHighClimbWhack"
-    Cone_Loading_ThreePiece = "Cone_Loading_ThreePiece"
-    Cube_Loading_ThreePieceBumper = "Cube_Loading_ThreePieceBumper"
-    Cone_Loading_TwoMidOneHigh = "Cone_Loading_TwoMidOneHigh"
-    Cube_Wall_TwoHighClimb = "Cube_Wall_TwoHighClimb"
+    #Cube_Wall_TwoHighAndGather= "Cube_Wall_TwoHighAndGather"
+    #Cube_Bump_Whack = "Cube_Bump_Whack"
+    #Cube_Loading_TwoAndHalfPieceClimb = "Cube_Loading_TwoAndHalfPieceClimb"
+    #Cone_Loading_TwoHighClimbWhack = "Cone_Loading_TwoHighClimbWhack"
+    #Cone_Loading_ThreePiece = "Cone_Loading_ThreePiece"
+    #Cube_Loading_ThreePieceBumper = "Cube_Loading_ThreePieceBumper"
+    Cone_Loading_TwoHighOneMid = "Cone_Loading_TwoHighOneMid"
+    # Cube_Wall_TwoHighClimb = "Cube_Wall_TwoHighClimb"
 
     # Incomplete Autos
     # Cube_Loading_GatherAndClimb = "Cube_Loading_GatherAndClimb"
 
     # Test Autos
     # AutoBalance = "Test_Test_AutoBalance"
-    Curve = "Test_Test_Curve"
+    # Curve = "Test_Test_Curve"
     # StraightLine = "Test_Test_StraightLine"
     # Curve = "Test_Test_Curve"
-    StraightLine = "Test_Test_StraightLine"
+    # StraightLine = "Test_Test_StraightLine"
 
     def __str__(self) -> str:
         return str.__str__(self)
@@ -72,29 +72,29 @@ def init_auto_selection_map():
     """
     return {
         AutonomousNames.Cone_Loading_TwoHighClimb: Cone_Loading_TwoHighClimb(),
-        AutonomousNames.Cone_Loading_TwoMidClimb: Cone_Loading_TwoMidClimb(),
+        #AutonomousNames.Cone_Loading_TwoMidClimb: Cone_Loading_TwoMidClimb(),
         AutonomousNames.Cube_Middle_Climb: Cube_Middle_Climb(),
         # AutonomousNames.Cone_Wall_GatherAndClimb: Cone_Wall_GatherAndClimb(),
-        AutonomousNames.Cube_Loading_MidLink: Cube_Loading_MidLink(),
-        AutonomousNames.Cube_Loading_ExperimentalMidLink: Cube_Loading_ExperimentalMidLink(),
+        #AutonomousNames.Cube_Loading_MidLink: Cube_Loading_MidLink(),
+        #AutonomousNames.Cube_Loading_ExperimentalMidLink: Cube_Loading_ExperimentalMidLink(),
         AutonomousNames.Cone_Middle_Climb: Cone_Middle_Climb(),
         AutonomousNames.Cube_Wall_TwoHigh: Cube_Wall_TwoHigh(),
-        AutonomousNames.Cube_Wall_TwoHighAndGather: Cube_Wall_TwoHighAndGather(),
-        AutonomousNames.Cube_Bump_Whack: Cube_Bump_Whack(),
-        AutonomousNames.Cube_Loading_TwoAndHalfPieceClimb: Cube_Loading_TwoAndHalfPieceClimb(),
-        AutonomousNames.Cone_Loading_TwoHighClimbWhack: Cone_Loading_TwoHighClimbWhack(),
-        AutonomousNames.Cone_Loading_ThreePiece: Cone_Loading_ThreePiece(),
-        AutonomousNames.Cube_Loading_ThreePieceBumper: Cube_Loading_ThreePieceBumper(),
-        AutonomousNames.Cone_Loading_TwoMidOneHigh: Cone_Loading_TwoMidOneHigh(),
-        AutonomousNames.Cube_Wall_TwoHighClimb: Cube_Wall_TwoHighClimb(),
+        #AutonomousNames.Cube_Wall_TwoHighAndGather: Cube_Wall_TwoHighAndGather(),
+        #AutonomousNames.Cube_Bump_Whack: Cube_Bump_Whack(),
+        #AutonomousNames.Cube_Loading_TwoAndHalfPieceClimb: Cube_Loading_TwoAndHalfPieceClimb(),
+        #AutonomousNames.Cone_Loading_TwoHighClimbWhack: Cone_Loading_TwoHighClimbWhack(),
+        #AutonomousNames.Cone_Loading_ThreePiece: Cone_Loading_ThreePiece(),
+        #AutonomousNames.Cube_Loading_ThreePieceBumper: Cube_Loading_ThreePieceBumper(),
+        AutonomousNames.Cone_Loading_TwoHighOneMid: Cone_Loading_TwoHighOneMid(),
+        # AutonomousNames.Cube_Wall_TwoHighClimb: Cube_Wall_TwoHighClimb(),
 
         # Incomplete Autos
         # AutonomousNames.Cube_Loading_GatherAndClimb: Cube_Loading_GatherAndClimb(),
 
         # Test Autos
         # AutonomousNames.AutoBalance: AutoBalance(),
-        AutonomousNames.Curve: Curve(),
+        # AutonomousNames.Curve: Curve(),
         # AutonomousNames.StraightLine: StraightLine(),
         # AutonomousNames.Curve: Curve(),
-        AutonomousNames.StraightLine: StraightLine(),
+        # AutonomousNames.StraightLine: StraightLine(),
     }
