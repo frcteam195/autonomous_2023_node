@@ -44,7 +44,7 @@ class Cone_Loading_TwoMidOneHigh(AutoBase):
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.15),
                     StopIntakeAction(False),
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.85),
-                    LaunchAction(False, 0.5)
+                    LaunchAction(False, 0.2, 0.2)
                 ])
             ]),
             ParallelAction([
