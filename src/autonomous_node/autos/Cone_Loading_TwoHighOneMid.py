@@ -44,7 +44,7 @@ class Cone_Loading_TwoHighOneMid(AutoBase):
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.15),
                     StopIntakeAction(False),
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.85),
-                    LaunchAction(False, 0.15, 0.2)
+                    LaunchAction(False, 0.12, 0.2)
                 ])
             ]),
             ParallelAction([
@@ -66,7 +66,7 @@ class Cone_Loading_TwoHighOneMid(AutoBase):
                     MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT)
                 ])  
             ]),
-            LaunchAction(False, 0.7, 0.2),
+            LaunchAction(False, 0.45, 0.2),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO, 7, 7),
             MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
         ])
