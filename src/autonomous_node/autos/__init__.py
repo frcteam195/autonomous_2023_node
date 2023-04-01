@@ -39,8 +39,8 @@ class AutonomousNames(str, Enum):
     #Cube_Loading_MidLink = "Cone_Loading_MidLink"
     #Cube_Loading_ExperimentalMidLink = "Cone_Loading_ExperimentalMidLink"
     Cube_Middle_Climb = "Cube_Middle_Climb"
-    Cube_Wall_TwoHigh = "Cube_Wall_TwoHigh"
-    #Cube_Wall_TwoHighAndGather= "Cube_Wall_TwoHighAndGather"
+    # Cube_Wall_TwoHigh = "Cube_Wall_TwoHigh"
+    Cube_Wall_TwoHighAndGather= "Cube_Wall_TwoHighAndGather"
     #Cube_Bump_Whack = "Cube_Bump_Whack"
     #Cube_Loading_TwoAndHalfPieceClimb = "Cube_Loading_TwoAndHalfPieceClimb"
     #Cone_Loading_TwoHighClimbWhack = "Cone_Loading_TwoHighClimbWhack"
@@ -78,8 +78,8 @@ def init_auto_selection_map():
         #AutonomousNames.Cube_Loading_MidLink: Cube_Loading_MidLink(),
         #AutonomousNames.Cube_Loading_ExperimentalMidLink: Cube_Loading_ExperimentalMidLink(),
         AutonomousNames.Cone_Middle_Climb: Cone_Middle_Climb(),
-        AutonomousNames.Cube_Wall_TwoHigh: Cube_Wall_TwoHigh(),
-        #AutonomousNames.Cube_Wall_TwoHighAndGather: Cube_Wall_TwoHighAndGather(),
+        # AutonomousNames.Cube_Wall_TwoHigh: Cube_Wall_TwoHigh(),
+        AutonomousNames.Cube_Wall_TwoHighAndGather: Cube_Wall_TwoHighAndGather(),
         #AutonomousNames.Cube_Bump_Whack: Cube_Bump_Whack(),
         #AutonomousNames.Cube_Loading_TwoAndHalfPieceClimb: Cube_Loading_TwoAndHalfPieceClimb(),
         #AutonomousNames.Cone_Loading_TwoHighClimbWhack: Cone_Loading_TwoHighClimbWhack(),
