@@ -45,13 +45,6 @@ class Cube_Wall_TwoHighAndGather(AutoBase):
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                SeriesAction([
-                    MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO, 7, 9),
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.55),
-                    MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK)
-                ])
-            ]),
-            IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
-            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO, 7, 9),
-            StopIntakeAction(True)
+                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO, 7, 9)
+            ])
         ])
