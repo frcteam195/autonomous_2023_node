@@ -30,13 +30,12 @@ class Cube_Bump_Whack(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-
-            StopIntakeAction(False, -1),
-            MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_90, 5, 5),
             ParallelAction([
+                StopIntakeAction(False, -1),
+                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_90, 5, 5),
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.60),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.40),
                     IntakeAction(False, -1, 0.2),
                 ])
             ]),
@@ -56,14 +55,17 @@ class Cube_Bump_Whack(AutoBase):
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
                     MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
-                    IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO)
+                    IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO, True)
                 ])
             ]),
-            IntakeAction(True, -1, 0.25),
-            StopIntakeAction(True, -1),
+            WaitAction(0.5),
             ParallelAction([
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
                 self.trajectory_iterator.get_next_trajectory_action(),
+                SeriesAction([
+                    WaitAction(0.1),
+                    StopIntakeAction(True, -1)
+                ]),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.55),
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
