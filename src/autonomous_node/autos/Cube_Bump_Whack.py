@@ -30,12 +30,13 @@ class Cube_Bump_Whack(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_90, 5, 5),
+
             StopIntakeAction(False, -1),
+            MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_90, 5, 5),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.90),
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.60),
                     IntakeAction(False, -1, 0.2),
                 ])
             ]),
@@ -48,23 +49,28 @@ class Cube_Bump_Whack(AutoBase):
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_90)
                 ])
             ]),
-            LaunchAction(False, 0.2, 0.2),
+            LaunchAction(False, 0.15, 0.2),
             ParallelAction([
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
-                self.trajectory_iterator.get_next_trajectory_action()
-            ]),
-            MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
-            IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
-            IntakeAction(True, -1, 0.25),
-            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
-            StopIntakeAction(True, -1),
-            ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(3, 0.7),
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
+                    MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
+                    IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO)
+                ])
+            ]),
+            IntakeAction(True, -1, 0.25),
+            StopIntakeAction(True, -1),
+            ParallelAction([
+                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
+                self.trajectory_iterator.get_next_trajectory_action(),
+                SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.55),
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
                 ])
             ]),
-            ScoreConeMiddle(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
-            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+            WaitAction(0.25),            
+            ScoreConeHigh(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
+            WaitAction(0.35),
+            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180)
         ])
