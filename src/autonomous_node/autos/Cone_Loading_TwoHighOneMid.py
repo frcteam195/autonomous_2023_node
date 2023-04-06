@@ -63,10 +63,12 @@ class Cone_Loading_TwoHighOneMid(AutoBase):
                     StopIntakeAction(False),
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.70),
-                    MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT)
+                    MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT),
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.98),
+                    LaunchAction(False, 0.45, 0.2)
+
                 ])  
             ]),
-            LaunchAction(False, 0.45, 0.2),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO, 7, 7),
             MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT)
         ])
