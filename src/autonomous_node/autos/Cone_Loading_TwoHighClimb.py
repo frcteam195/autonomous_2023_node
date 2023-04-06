@@ -31,7 +31,7 @@ class Cone_Loading_TwoHighClimb(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, 0, 5, 7),
+                    MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, 0, 7, 7),
                     MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 ]),
                 SeriesAction([
