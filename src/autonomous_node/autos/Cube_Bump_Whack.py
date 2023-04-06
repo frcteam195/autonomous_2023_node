@@ -58,12 +58,12 @@ class Cube_Bump_Whack(AutoBase):
                     IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO, True)
                 ])
             ]),
-            WaitAction(0.5),
+            WaitAction(0.35),
             ParallelAction([
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    WaitAction(0.1),
+                    WaitAction(0.25),
                     StopIntakeAction(True, -1)
                 ]),
                 SeriesAction([
