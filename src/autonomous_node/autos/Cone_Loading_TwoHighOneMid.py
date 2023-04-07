@@ -33,15 +33,15 @@ class Cone_Loading_TwoHighOneMid(AutoBase):
                     MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 ]),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.70),
-                    IntakeAction(False, -1, 0.25)
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.50),
+                    IntakeAction(False, -1, 0.35)
                 ])
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(1, 0.15),
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.07),
                     StopIntakeAction(False),
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.85),
                     LaunchAction(False, 0.12, 0.2)
@@ -53,14 +53,17 @@ class Cone_Loading_TwoHighOneMid(AutoBase):
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.1),
                     StopIntakeAction(False),
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.75),
-                    IntakeAction(False, -1, 0.25)
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.50),
+                    IntakeAction(False, -1, 0.35)
                 ])
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(3, 0.07),
                     StopIntakeAction(False),
+                ]),
+                SeriesAction([
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.70),
                     MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT),
