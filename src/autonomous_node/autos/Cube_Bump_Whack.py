@@ -45,10 +45,10 @@ class Cube_Bump_Whack(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.65),
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_90)
+                    MoveArmAction(Arm_Goal.MID_CUBE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_90)
                 ])
             ]),
-            LaunchAction(False, 0.3, 0.2),
+            LaunchAction(False, 0.21, 0.2),
             ParallelAction([
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
                 self.trajectory_iterator.get_next_trajectory_action(),
