@@ -11,15 +11,15 @@ from actions_node.game_specific_actions.LaunchAction import *
 from ck_ros_msgs_node.msg import Arm_Goal
 from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 
-class Cube_Loading_ThreePieceBumper(AutoBase):
+class Cube_Loading_ThreePieceWhack(AutoBase):
     """
     Score two game pieces on the loading side.
     """
     def __init__(self) -> None:
-        super().__init__(display_name="ThreePieceBumper",
+        super().__init__(display_name="ThreePieceWhack",
                          game_piece=GamePiece.Cube,
                          start_position=StartPosition.Loading,
-                         expected_trajectory_count=5)
+                         expected_trajectory_count=4)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
@@ -27,21 +27,24 @@ class Cube_Loading_ThreePieceBumper(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK, 0),
-                    WaitUntilPercentCompletedTrajectoryAction(0, 0.70),
-                    IntakeDeadCone(Arm_Goal.SIDE_BACK)
+                    WaitUntilPercentCompletedTrajectoryAction(0, 0.40),
+                    IntakeDeadCone(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO)
                 ]),
             ]),
+            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 StopIntakeAction(True),
-                ScoreConeHigh(Arm_Goal.SIDE_FRONT),
-                MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
-                WaitAction(0.25),
+                SeriesAction([
+                    WaitUntilPercentCompletedTrajectoryAction(1, 0.85),
+                    ScoreConeHigh(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
+                    WaitAction(0.25)
+                ]),
             ]),
+            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
+                MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
                     IntakeAction(False, -1, 0.2)
@@ -50,13 +53,7 @@ class Cube_Loading_ThreePieceBumper(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 StopIntakeAction(True),
-                MoveArmAction(Arm_Goal.MID_CONE, Arm_Goal.SIDE_FRONT),
-                SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(3, 0.9),
-                    LaunchAction(True, 1, 0.75),
-                ])  
+                ScoreCubeHigh(Arm_Goal.SIDE_BACK)
             ]),
-            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
-            self.trajectory_iterator.get_next_trajectory_action(),
-
+            MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
         ])

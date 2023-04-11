@@ -13,7 +13,7 @@ from autonomous_node.autos.Cube_Wall_TwoHighClimb import Cube_Wall_TwoHighClimb
 from autonomous_node.autos.Cube_Loading_TwoAndHalfPieceClimb import Cube_Loading_TwoAndHalfPieceClimb
 from autonomous_node.autos.Cone_Loading_TwoHighClimbWhack import Cone_Loading_TwoHighClimbWhack
 from autonomous_node.autos.Cone_Loading_ThreePiece import Cone_Loading_ThreePiece
-from autonomous_node.autos.Cube_Loading_ThreePieceBumper import Cube_Loading_ThreePieceBumper
+from autonomous_node.autos.Cube_Loading_ThreePieceWhack import Cube_Loading_ThreePieceWhack
 from autonomous_node.autos.Cone_Loading_TwoHighOneMid import Cone_Loading_TwoHighOneMid
 from autonomous_node.autos.Cube_Bump_CheeseTicTacToeEdition import Cube_Bump_CheeseTicTacToeEdition
 from autonomous_node.autos.Cube_Bump_Whack import Cube_Bump_Whack
@@ -41,13 +41,13 @@ class AutonomousNames(str, Enum):
     #Cube_Loading_ExperimentalMidLink = "Cone_Loading_ExperimentalMidLink"
     Cube_Middle_Climb = "Cube_Middle_Climb"
     # Cube_Wall_TwoHigh = "Cube_Wall_TwoHigh"
-    Cube_Wall_TwoHighAndGather= "Cube_Wall_TwoHighAndGather"
+    Cube_Wall_TwoHighAndGather = "Cube_Wall_TwoHighAndGather"
     Cube_Bump_Whack = "Cube_Bump_Whack"
     Cube_Bump_CheeseTicTacToeEdition = "Cube_Bump_CheeseTicTacToeEdition"
     #Cube_Loading_TwoAndHalfPieceClimb = "Cube_Loading_TwoAndHalfPieceClimb"
     #Cone_Loading_TwoHighClimbWhack = "Cone_Loading_TwoHighClimbWhack"
     #Cone_Loading_ThreePiece = "Cone_Loading_ThreePiece"
-    #Cube_Loading_ThreePieceBumper = "Cube_Loading_ThreePieceBumper"
+    Cube_Loading_ThreePieceWhack = "Cube_Loading_ThreePieceWhack"
     Cone_Loading_TwoHighOneMid = "Cone_Loading_TwoHighOneMid"
     # Cube_Wall_TwoHighClimb = "Cube_Wall_TwoHighClimb"
 
@@ -87,7 +87,7 @@ def init_auto_selection_map():
         #AutonomousNames.Cube_Loading_TwoAndHalfPieceClimb: Cube_Loading_TwoAndHalfPieceClimb(),
         #AutonomousNames.Cone_Loading_TwoHighClimbWhack: Cone_Loading_TwoHighClimbWhack(),
         #AutonomousNames.Cone_Loading_ThreePiece: Cone_Loading_ThreePiece(),
-        #AutonomousNames.Cube_Loading_ThreePieceBumper: Cube_Loading_ThreePieceBumper(),
+        AutonomousNames.Cube_Loading_ThreePieceWhack: Cube_Loading_ThreePieceWhack(),
         AutonomousNames.Cone_Loading_TwoHighOneMid: Cone_Loading_TwoHighOneMid(),
         # AutonomousNames.Cube_Wall_TwoHighClimb: Cube_Wall_TwoHighClimb(),
 
