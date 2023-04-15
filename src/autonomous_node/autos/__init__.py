@@ -43,7 +43,7 @@ class AutonomousNames(str, Enum):
     # Cube_Wall_TwoHigh = "Cube_Wall_TwoHigh"
     Cube_Wall_TwoHighAndGather = "Cube_Wall_TwoHighAndGather"
     Cube_Bump_Whack = "Cube_Bump_Whack"
-    Cube_Bump_CheeseTicTacToeEdition = "Cube_Bump_CheeseTicTacToeEdition"
+    # Cube_Bump_CheeseTicTacToeEdition = "Cube_Bump_CheeseTicTacToeEdition"
     #Cube_Loading_TwoAndHalfPieceClimb = "Cube_Loading_TwoAndHalfPieceClimb"
     #Cone_Loading_TwoHighClimbWhack = "Cone_Loading_TwoHighClimbWhack"
     #Cone_Loading_ThreePiece = "Cone_Loading_ThreePiece"
@@ -83,7 +83,7 @@ def init_auto_selection_map():
         # AutonomousNames.Cube_Wall_TwoHigh: Cube_Wall_TwoHigh(),
         AutonomousNames.Cube_Wall_TwoHighAndGather: Cube_Wall_TwoHighAndGather(),
         AutonomousNames.Cube_Bump_Whack: Cube_Bump_Whack(),
-        AutonomousNames.Cube_Bump_CheeseTicTacToeEdition: Cube_Bump_CheeseTicTacToeEdition(),
+        # AutonomousNames.Cube_Bump_CheeseTicTacToeEdition: Cube_Bump_CheeseTicTacToeEdition(),
         #AutonomousNames.Cube_Loading_TwoAndHalfPieceClimb: Cube_Loading_TwoAndHalfPieceClimb(),
         #AutonomousNames.Cone_Loading_TwoHighClimbWhack: Cone_Loading_TwoHighClimbWhack(),
         #AutonomousNames.Cone_Loading_ThreePiece: Cone_Loading_ThreePiece(),
