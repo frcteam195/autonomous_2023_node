@@ -24,7 +24,7 @@ class Cube_Loading_ThreePieceCube(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.CUBE_PUSH_AUTO, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO, 6, 5),
+            MoveArmAction(Arm_Goal.CUBE_PUSH_AUTO, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
@@ -35,7 +35,7 @@ class Cube_Loading_ThreePieceCube(AutoBase):
             ]),
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
-                MoveArmAction(Arm_Goal.MID_CUBE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.MID_CUBE_AUTO, Arm_Goal.SIDE_FRONT),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.03),
                     StopIntakeAction(False),
@@ -43,6 +43,7 @@ class Cube_Loading_ThreePieceCube(AutoBase):
                     LaunchAction(False, 0.28, 0.2)
                 ])
             ]),
+            MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO, 5, 5),
             ParallelAction([
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK),
                 self.trajectory_iterator.get_next_trajectory_action(),
@@ -60,9 +61,9 @@ class Cube_Loading_ThreePieceCube(AutoBase):
                     StopIntakeAction(False),
                 ]),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT),
+                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_90),
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.70),
-                    MoveArmAction(Arm_Goal.HIGH_CUBE, Arm_Goal.SIDE_FRONT),
+                    MoveArmAction(Arm_Goal.HIGH_CUBE_AUTO, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_90),
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.98),
                     LaunchAction(False, 0.35, 0.2)
 
