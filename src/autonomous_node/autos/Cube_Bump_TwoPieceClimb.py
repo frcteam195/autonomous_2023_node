@@ -55,6 +55,6 @@ class Cube_Bump_TwoPieceClimb(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT)
             ]),
-            WaitAction(0.5),
+            WaitAction(0.35),
             AutoBalanceAction(BalanceDirection.ROLL, -90.0)
         ])
