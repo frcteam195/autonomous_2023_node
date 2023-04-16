@@ -42,7 +42,7 @@ class Cone_Loading_TwoHighClimb(AutoBase):
             ParallelAction([
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO, 7, 7),
+                    MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_90, 7, 7),
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.10),
                     StopIntakeAction(False),
                 ])
