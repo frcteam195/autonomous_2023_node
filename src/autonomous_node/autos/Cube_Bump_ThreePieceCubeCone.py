@@ -59,7 +59,7 @@ class Cube_Bump_ThreePieceCubeCone(AutoBase):
                     IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO, True)
                 ])
             ]),
-            WaitAction(0.35),
+            WaitAction(0.25),
             ParallelAction([
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
                 self.trajectory_iterator.get_next_trajectory_action(),
@@ -72,7 +72,6 @@ class Cube_Bump_ThreePieceCubeCone(AutoBase):
                     MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
                 ])
             ]),
-            WaitAction(0.25),            
             ScoreConeHigh(Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180),
             WaitAction(0.35),
             MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_180)
