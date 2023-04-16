@@ -30,6 +30,7 @@ class Cube_Bump_ThreePieceCubeCone(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
+            MoveArmAction(Arm_Goal.CUBE_PUSH_AUTO, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             ParallelAction([
                 StopIntakeAction(False, -1),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_90, 5, 5),
@@ -45,7 +46,7 @@ class Cube_Bump_ThreePieceCubeCone(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.65),
-                    MoveArmAction(Arm_Goal.MID_CUBE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_90)
+                    MoveArmAction(Arm_Goal.MID_CUBE_AUTO, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_90)
                 ])
             ]),
             LaunchAction(False, 0.21, 0.2),
