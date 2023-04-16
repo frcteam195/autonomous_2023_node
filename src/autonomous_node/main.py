@@ -13,7 +13,6 @@ from frc_robot_utilities_py_node.RobotStatusHelperPy import RobotMode
 from autonomous_node.autos import AUTONOMOUS_SELECTION_MAP, AutonomousNames
 from autonomous_node.autos.AutoBase import AutoBase
 from actions_node.default_actions.Action import Action
-from autonomous_node.autos import CorrectStart
 from autonomous_node.autos import init_auto_selection_map
 from threading import RLock
 

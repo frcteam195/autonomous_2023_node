@@ -16,13 +16,13 @@ from actions_node.default_actions.ResetPoseAction import ResetPoseAction
 from actions_node.game_specific_actions.AutoBalanceAction import AutoBalanceAction, BalanceDirection
 
 
-class Cube_Bump_Whack(AutoBase):
+class Cube_Bump_ThreePieceCubeCone(AutoBase):
     """
     Score two game pieces on the loading side.
     """
 
     def __init__(self) -> None:
-        super().__init__(display_name="Whack",
+        super().__init__(display_name="ThreePieceCubeCone",
                          game_piece=GamePiece.Cube,
                          start_position=StartPosition.Bump,
                          expected_trajectory_count=4)
