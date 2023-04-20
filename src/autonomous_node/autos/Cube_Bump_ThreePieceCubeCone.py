@@ -54,7 +54,7 @@ class Cube_Bump_ThreePieceCubeCone(AutoBase):
                 MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
                 self.trajectory_iterator.get_next_trajectory_action(),
                 SeriesAction([
-                    WaitUntilPercentCompletedTrajectoryAction(2, 0.5),
+                    WaitUntilPercentCompletedTrajectoryAction(2, 0.55),
                     MoveArmAction(Arm_Goal.PRE_DEAD_CONE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO),
                     IntakeDeadCone(Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_ZERO, True)
                 ])
