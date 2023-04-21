@@ -35,6 +35,7 @@ class Cube_Middle_Climb(AutoBase):
                 self.trajectory_iterator.get_next_trajectory_action(),
             ]),
             self.trajectory_iterator.get_next_trajectory_action(),
+            WaitAction(0.3),
             self.trajectory_iterator.get_next_trajectory_action(),
             AutoBalanceAction(BalanceDirection.ROLL, 90.0)
         ])
