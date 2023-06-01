@@ -20,7 +20,7 @@ class Cube_Middle_Climb(AutoBase):
         super().__init__(display_name="Climb",
                          game_piece=GamePiece.Cube,
                          start_position=StartPosition.Middle,
-                         expected_trajectory_count=3)
+                         expected_trajectory_count=2)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
@@ -31,10 +31,9 @@ class Cube_Middle_Climb(AutoBase):
             StopIntakeAction(False),
             MoveArmAction(Arm_Goal.HOME, Arm_Goal.SIDE_FRONT),
             ParallelAction([
-                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK),
                 self.trajectory_iterator.get_next_trajectory_action(),
             ]),
-            self.trajectory_iterator.get_next_trajectory_action(),
             WaitAction(0.3),
             self.trajectory_iterator.get_next_trajectory_action(),
             AutoBalanceAction(BalanceDirection.ROLL, 90.0)

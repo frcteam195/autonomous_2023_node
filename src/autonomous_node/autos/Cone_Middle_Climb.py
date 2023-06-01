@@ -20,7 +20,7 @@ class Cone_Middle_Climb(AutoBase):
         super().__init__(display_name="Climb",
                          game_piece=GamePiece.Cone,
                          start_position=StartPosition.Middle,
-                         expected_trajectory_count=3)
+                         expected_trajectory_count=2)
 
     def get_action(self) -> SeriesAction:
         return SeriesAction([
@@ -29,10 +29,9 @@ class Cone_Middle_Climb(AutoBase):
             ScoreConeHigh(Arm_Goal.SIDE_FRONT),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             ParallelAction([
-                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_FRONT),
+                MoveArmAction(Arm_Goal.SPORT_MODE, Arm_Goal.SIDE_BACK),
                 self.trajectory_iterator.get_next_trajectory_action(),
             ]),
-            self.trajectory_iterator.get_next_trajectory_action(),
             WaitAction(0.3),
             self.trajectory_iterator.get_next_trajectory_action(),
             AutoBalanceAction(BalanceDirection.ROLL, 90.0)
