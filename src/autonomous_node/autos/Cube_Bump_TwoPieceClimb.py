@@ -30,7 +30,7 @@ class Cube_Bump_TwoPieceClimb(AutoBase):
     def get_action(self) -> SeriesAction:
         return SeriesAction([
             ResetPoseAction(self.get_unique_name()),
-            MoveArmAction(Arm_Goal.CUBE_PUSH_HARD_AUTO, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
+            ##MoveArmAction(Arm_Goal.CUBE_PUSH_HARD_AUTO, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO),
             ParallelAction([
                 StopIntakeAction(False, -1),
                 MoveArmAction(Arm_Goal.GROUND_CUBE, Arm_Goal.SIDE_BACK, Arm_Goal.WRIST_90, 5, 5),
