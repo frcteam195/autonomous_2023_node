@@ -41,7 +41,7 @@ class Cube_Loading_ThreePieceCube(AutoBase):
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.03),
                     StopIntakeAction(False),
                     WaitUntilPercentCompletedTrajectoryAction(1, 0.85),
-                    LaunchAction(False, 0.28, 0.2)
+                    LaunchAction(False, 0.20, 0.2)
                 ])
             ]),
             MoveArmAction(Arm_Goal.PRE_SCORE, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_ZERO, 5, 5),
@@ -66,7 +66,7 @@ class Cube_Loading_ThreePieceCube(AutoBase):
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.70),
                     MoveArmAction(Arm_Goal.HIGH_CUBE_AUTO, Arm_Goal.SIDE_FRONT, Arm_Goal.WRIST_90),
                     WaitUntilPercentCompletedTrajectoryAction(3, 0.98),
-                    LaunchAction(False, 0.28, 0.2)
+                    LaunchAction(False, 0.20, 0.2)
 
                 ])  
             ]),
